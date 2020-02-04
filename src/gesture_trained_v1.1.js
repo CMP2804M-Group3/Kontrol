@@ -114,8 +114,8 @@ function draw() {
   image(video,0,0);
   if(pose){
     //for(let i = 0; i < pose.keypoints.length; i++){
-      let x = pose.keypoints[j].position.x;
-      let y = pose.keypoints[j].position.y;
+      let x = pose.keypoints[gesture_select].position.x;
+      let y = pose.keypoints[gesture_select].position.y;
       fill(0,255,0);
       ellipse(x,y,16,16);
     //}
