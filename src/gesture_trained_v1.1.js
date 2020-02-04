@@ -14,12 +14,12 @@ function keyPressed(){
   else if(key == 'q'|| key == 'w'){
     if(key == 'q'){
         targetLabel = 'hello';
-      gesture_selec=9;
+      gesture_select=9;
         console.log(targetLabel);     
       }
     if(key == 'w'){
         targetLabel = 'play';
-      gesture_selec=10;
+      gesture_select=10;
         console.log(targetLabel);     
       }
       setTimeout(function(){
