@@ -90,8 +90,8 @@ function gotPoses(poses) {
     {
       //let inputs = [];
       //for(let i = 0; i < 9; i++){
-      let x = pose.keypoints[j].position.x;
-      let y = pose.keypoints[j].position.y;
+      let x = pose.keypoints[gesture_select].position.x;
+      let y = pose.keypoints[gesture_select].position.y;
       inputs.push(x);
       inputs.push(y);
       //}
