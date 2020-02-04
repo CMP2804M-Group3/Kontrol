@@ -95,8 +95,7 @@ function gotPoses(poses) {
       inputs.push(x);
       inputs.push(y);
       //}
-      pose_record_count++;
-      if(pose_record_count>4){
+      if(++pose_record_count>4){
         let target = [targetLabel];
         brain.addData(inputs, target);
         inputs = [];
