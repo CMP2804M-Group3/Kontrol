@@ -5,7 +5,6 @@ let skeleton;
 let brain;
 let state='waiting';
 let targetLabel;
-let inputs = [];
 function keyPressed(){
   if(key == 's') {
     brain.saveData();
@@ -82,19 +81,16 @@ function gotPoses(poses) {
       let target = [targetLabel];
       brain.addData(input_arr, target);
     }*/
-    if(state == 'collecting')
-    {
-        for(let i = 0; i < pose.keypoints.length; i++){
-          let x = pose.keypoints[i].position.x;
-          let y = pose.keypoints[i].position.y;
-          inputs.push(x);
-          inputs.push(y);
-      }
-    }
-    else if(state == 'waiting'){
-      let target = [targetLabel];
-      brain.addData(inputs, target);
-    }
+   if(state == 'collecting'){
+     let inputs = [];
+     for(let i = 0; i < pose.keypoints.length; i++){
+        let x = pose.keypoints[i].position.x;
+        let y = pose.keypoints[i].position.y;
+        inputs.push(x);
+        inputs.push(y);
+     }
+     let target = [targetLabel];
+     brain.addData(inputs, target);
   }
 }
 
