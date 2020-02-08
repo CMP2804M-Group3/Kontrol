@@ -45,7 +45,7 @@ function setup() {
   poseNet.on('pose',gotPoses);
   
   let options = {
-    inputs:10,
+    inputs:32,
     outputs:2,
     task:"classification",
     debug:true
@@ -57,7 +57,7 @@ function dataReady(){
   console.log('start');
   brain.normalizeData();
   console.log('start_training');
-  brain.train({epochs:50}, finished);
+  brain.train({epochs:150}, finished);
 }
 
 function finished(){
@@ -89,12 +89,12 @@ function gotPoses(poses) {
     if(state == 'collecting')
     {
       //let inputs = [];
-      //for(let i = 0; i < 9; i++){
-      let x = pose.keypoints[gesture_select].position.x;
-      let y = pose.keypoints[gesture_select].position.y;
-      inputs.push(x);
-      inputs.push(y);
-      //}
+      for(let i = 7; i < 11; i++){
+        let x = pose.keypoints[i].position.x;
+        let y = pose.keypoints[i].position.y;
+        inputs.push(x);
+        inputs.push(y);
+      }
       if(++pose_record_count>4){
         let target = [targetLabel];
         brain.addData(inputs, target);
@@ -112,12 +112,12 @@ function modelLoaded() {
 function draw() {
   image(video,0,0);
   if(pose){
-    //for(let i = 0; i < pose.keypoints.length; i++){
-      let x = pose.keypoints[gesture_select].position.x;
-      let y = pose.keypoints[gesture_select].position.y;
+    for(let i = 7; i < 11; i++){
+      let x = pose.keypoints[i].position.x;
+      let y = pose.keypoints[i].position.y;
       fill(0,255,0);
       ellipse(x,y,16,16);
-    //}
+    }
     for(let i = 0; i < skeleton.length; i++){
       let a = skeleton[i][0];
       let b = skeleton[i][1];
