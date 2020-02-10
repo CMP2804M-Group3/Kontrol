@@ -10,6 +10,7 @@ class inputVideo {
         this.name = name;
         this.video = document.getElementById("video");
         this.video.src = src;
+
         this.poseNet = ml5.poseNet(this.video, {inputResolution: 417}, callback);
         that = this;
         this.poseNet.on("pose", function (results) {
@@ -34,10 +35,43 @@ class inputVideo {
         };
     }
 
+    initClassify(callback){
+        brain.load("models/model.json", callback);
+    }
+
+    classify(frameData, callback){
+        brain.classify(frameData).then((data) => {
+            let maxConfidence = 0;
+            let maxLabel = "";
+
+            for (let i=0; i < data.length; i++){
+                if (data[i].confidence > maxConfidence){
+                    maxConfidence = data[i].confidence;
+                    maxLabel = data[i].label;
+                }
+            }
+
+            callback(maxConfidence, maxLabel);
+        });
+    }
+
+    getFrameData(callback){
+        let self = this;
+
+        this.data = [];
+        this.collecting = true;
+
+        this.video.play();
+        this.video.onended = function(){
+            callback(self.data);
+            self.collecting = false;
+            self.video.onended = null;
+        }
+    }
+
     drawPoints(pose){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        // background(0);
-        // background(0);
+
         for (let i=5; i <= 10; i++){
             if (pose.pose.keypoints[i].score < 0.3) continue;
 
@@ -111,22 +145,32 @@ function trainVideos(videos, exitFunc, i = 0) {
 
 }
 
+const videos = [
+    {"name": "rightWave", "src": "https://cdn.discordapp.com/attachments/366568880413343746/676387708968632321/received_537545687107800.mp4" },
+    {"name": "leftWave", "src": "https://cdn.discordapp.com/attachments/366568880413343746/676422482189746196/received_789329468242228.mp4" }
+];
+
+function compareVideo(i){
+    let video = new inputVideo(videos[i].name, videos[i].src, () => {
+        video.initClassify(() => {
+            video.getFrameData((data) => {
+                video.classify(data, (confidence, label) => {
+                    console.log("this is a " + label + " with " + (confidence * 100) + "% accuracy.")
+                });
+            });
+        });
+    });
+}
+
 function setup() {
     brain = ml5.neuralNetwork({
         task: "classification",
         debug: true,
-        inputs: 108, 
+        inputs: 108,
         outputs: 2
     });
     createCanvas(600, 640);
-
-    let videos = [
-        {"name": "rightWave", "src": "https://cdn.discordapp.com/attachments/366568880413343746/676387708968632321/received_537545687107800.mp4" },
-        {"name": "leftWave", "src": "https://cdn.discordapp.com/attachments/366568880413343746/676422482189746196/received_789329468242228.mp4" }
-    ];
-
-    trainVideos(videos,  trainBrain);
-
+   // trainVideos(videos,  trainBrain);
 }
 
 function draw() {
