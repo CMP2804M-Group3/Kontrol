@@ -73,7 +73,7 @@ function gotPoses(poses) {
     if(state == 'collecting')
     {
       let inputs = [];
-      for(let i = 0; i < pose.keypoints.length; i++){
+      for(let i = 7; i < 11; i++){
         let x = pose.keypoints[i].position.x;
         let y = pose.keypoints[i].position.y;
         inputs.push(x);
