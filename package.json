@@ -22,5 +22,7 @@
   "bugs": {
     "url": "https://github.com/CMP2804M-Group3/gesture-recognition/issues"
   },
-  "homepage": "https://github.com/CMP2804M-Group3/gesture-recognition#readme"
+  "scripts": {
+    "start": "electron src/main.js"
+  }
 }
