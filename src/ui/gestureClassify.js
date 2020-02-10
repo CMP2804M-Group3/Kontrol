@@ -11,7 +11,7 @@ function setup() {
     brain = ml5.neuralNetwork({
         task: "classification",
         debug: true,
-        inputs: 100,
+        inputs: 108,
         outputs: 2
     });
     const modelInfo = {
