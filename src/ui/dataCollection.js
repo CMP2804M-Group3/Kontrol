@@ -6,6 +6,11 @@ let brain;
 // "https://cdn.discordapp.com/attachments/366568880413343746/676387708968632321/received_537545687107800.mp4"
 
 class inputVideo {
+    /**
+     * @param {string} name Name of the video
+     * @param {string} src URL poiting to the video file
+     * @constructor
+     */
     constructor(name, src, callback) {
         this.name = name;
         this.video = document.getElementById("video");
@@ -25,6 +30,10 @@ class inputVideo {
 
     }
 
+    /**
+     * Begins training on the video object.
+     * @param {Function} callback Callback called when video is finished playing.
+     */
     startTraining(callback) {
         this.collecting = true;
         this.video.play();
@@ -35,10 +44,19 @@ class inputVideo {
         };
     }
 
+    /**
+     * Sets up the class to begin classifiying its video.
+     * @param {Function} callback Callback called when model is ready.
+     */
     initClassify(callback){
         brain.load("models/model.json", callback);
     }
 
+    /**
+     * Classifies an array of points into a gesture.
+     * @param {Array} frameData Array of points to be classified
+     * @param {Function} callback Callback called when classification is complete.
+     */
     classify(frameData, callback){
         brain.classify(frameData).then((data) => {
             let maxConfidence = 0;
@@ -55,6 +73,10 @@ class inputVideo {
         });
     }
 
+    /**
+     * Parses a video into an array of points representing certain body parts.
+     * @param {Function} callback Callback called when classification is complete.
+     */
     getFrameData(callback){
         let self = this;
 
@@ -69,6 +91,10 @@ class inputVideo {
         }
     }
 
+    /**
+     * Renders data from a specified pose onto the canvas.
+     * @param {Object} pose Pose data
+     */
     drawPoints(pose){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -97,6 +123,10 @@ class inputVideo {
 
     }
 
+    /**
+     * Handler for when PoseNet detecs a pose.
+     * @param {Array} poses Array of poses.
+     */
     gotPose(poses) {
         let dataPoints = 0;
         if(this.collecting){
