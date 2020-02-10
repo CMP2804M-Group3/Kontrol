@@ -1,0 +1,41 @@
+<div id = "inserted">
+    <div class="content centerBoth">
+        <img id = "loadingMan1" src="images/gesture.svg" draggable="false">
+        <img id = "loadingMan2" src="images/gesture.svg" draggable="false">
+    </div>
+    <div class="bottomRight center">
+        <button class="whiteButton" onclick="loadContent('pages/manual.html')">Know the IP?</button>
+    </div>
+    <div class="bottomLeft">
+        <h2 class="loading">Looking for Kodi</h2>
+    </div>
+    <script>
+        console.log("Searching for Kodi...");
+        // The code for this isn't ready yet
+        if (kodiEnabled){
+            setTimeout( () => {
+                Kodi.scanForKodis((err, data) => {
+                    if (data){
+                        console.log(data);
+                        loadContent("pages/foundKodis.html", () => {
+                            var parent = document.getElementById('kodiList');
+                            for (let i = 0; i < data.length; i++) {
+                                parent.insertAdjacentHTML("beforeend",
+                                    `<li tabindex="0"><img class = "wifi" src="images/wifi-full.svg" draggable="false"><h2>${data[i]}</h2></li>`
+                                );
+
+                            }
+                        });
+
+                    }
+
+                }, 8080, 500);
+
+            }, 1000);
+        } else{
+            setTimeout( () => { loadContent("pages/enableRemoteControl.html") }, 5000);
+        }
+
+    </script>
+</div>
+

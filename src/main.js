@@ -5,17 +5,27 @@ let win;
 // Creates the electron window.
 function CreateWindow(){
 	win = new BrowserWindow({
-		width: 800,
-		height: 600,
+		width: 400,
+		height: 300,
+		frame: false,
+		transparent: true,
+		resizable: false,
+		fullscreen: false,
+		show: false,
 		webPreferences: {
 			nodeIntegration: true
 		}
+	});
+	win.setMenu(null);
+
+	win.webContents.on('dom-ready', function () {
+		win.show();
 	});
 
 	win.loadFile("ui/index.html");
 
 	// remove this before complete release
-	win.webContents.openDevTools();
+	// win.webContents.openDevTools();
 
 	win.on("closed", () => {
 		win = null;
