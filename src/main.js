@@ -25,14 +25,14 @@ function CreateWindow(){
 	win.loadFile("ui/index.html");
 
 	// remove this before complete release
-	// win.webContents.openDevTools();
+	win.webContents.openDevTools();
 
 	win.on("closed", () => {
 		win = null;
 	});
 }
-
-app.on("ready", CreateWindow);
+app.on('ready', () => setTimeout(CreateWindow, 500));
+// app.on("ready", CreateWindow);
 
 app.on("window-all-closed", () => {
 	app.quit();
