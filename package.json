@@ -11,7 +11,7 @@
     "ml5": "^0.4.3"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron src/main.js"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,6 @@
   "bugs": {
     "url": "https://github.com/CMP2804M-Group3/gesture-recognition/issues"
   },
-  "homepage": "https://github.com/CMP2804M-Group3/gesture-recognition#readme",
   "scripts": {
     "start": "electron src/main.js"
   }

@@ -83,8 +83,8 @@ class inputVideo {
 
 
 function addData(data, label) {
-    let d100 = data.slice(0, 100);
-    brain.addData(d100, [label]);
+    let d108 = data.slice(0, 108);
+    brain.addData(d108, [label]);
 }
 
 function trainBrain(epochs = 50) {
@@ -115,7 +115,7 @@ function setup() {
     brain = ml5.neuralNetwork({
         task: "classification",
         debug: true,
-        inputs: 100,
+        inputs: 108, 
         outputs: 2
     });
     createCanvas(600, 640);
