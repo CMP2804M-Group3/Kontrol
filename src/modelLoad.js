@@ -5,12 +5,8 @@ let skeleton;
 let brain;
 let state='waiting';
 let targetLabel;
-
-function keyPressed(){
-    
-}
-
-
+let inputs = [];
+let ges_count=0;
 function setup() {
   createCanvas(500, 400);
   video = createCapture(VIDEO);
@@ -19,7 +15,7 @@ function setup() {
   poseNet.on('pose',gotPoses);
   
   let options = {
-    inputs:34,
+    inputs:40,
     outputs:1,
     task:"classification",
     debug:true
@@ -40,15 +36,24 @@ function brainLoaded() {
 
 function classifyPose(){
   if(pose){
-    let inputs = [];
-      for(let i = 0; i < pose.keypoints.length; i++){
-        let x = pose.keypoints[i].position.x;
-        let y = pose.keypoints[i].position.y;
-        inputs.push(x);
-        inputs.push(y);
-      } 
+    //console.log(p);
+    //let inputs = [];
+    for(let i = 7; i < 11; i++){
+      let x = pose.keypoints[i].position.x;
+      let y = pose.keypoints[i].position.y;
+      inputs.push(x);
+      inputs.push(y);
+    } 
     brain.classify(inputs,gotResult);
-  } else{
+    if(++ges_count>4){
+      ges_count=0;
+      brain.classify(inputs,gotResult);
+    }
+    else{
+      setTimeout(classifyPose,1000);
+    }
+  }
+  else{
     setTimeout(classifyPose,100);
   }
 }
@@ -56,6 +61,7 @@ function classifyPose(){
 function gotResult(error, results){
   console.log(results);
   console.log(results[0].label);
+  inputs=[];
   classifyPose();
   
 }
