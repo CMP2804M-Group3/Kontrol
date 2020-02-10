@@ -7,7 +7,8 @@
     "test": "test"
   },
   "dependencies": {
-    "electron": "^7.1.10"
+    "electron": "^7.1.10",
+    "ml5": "^0.4.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -23,6 +24,6 @@
   },
   "homepage": "https://github.com/CMP2804M-Group3/gesture-recognition#readme",
   "scripts": {
-    "start": "electron src/"
+    "start": "electron src/main.js"
   }
 }
