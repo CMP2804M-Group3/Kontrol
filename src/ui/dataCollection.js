@@ -169,7 +169,7 @@ function addData(data, label) {
     brain.addData(sliced, [label]);
 }
 
-function trainBrain(epochs = 1000) {
+function trainBrain(epochs = 250) {
     brain.normalizeData();
     brain.train({"epochs":epochs}, () => {
         brain.save();
