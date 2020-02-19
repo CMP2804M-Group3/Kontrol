@@ -83,6 +83,8 @@ class inputVideo {
                 }
             }
 
+            console.log(data);
+
             callback(maxConfidence, maxLabel);
         });
     }
@@ -113,7 +115,7 @@ class inputVideo {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         for (let i=5; i <= 10; i++){
-            if (pose.pose.keypoints[i].score < 0.3) continue;
+            if (pose.pose.keypoints[i].score < 0) continue;
 
             let x = pose.pose.keypoints[i].position.x;
             let y = pose.pose.keypoints[i].position.y;
@@ -145,6 +147,7 @@ class inputVideo {
         let dataPoints = 0;
         if(this.collecting){
             if(poses.length > 0){
+                console.log(poses[0]);
                 let pose = poses[0].pose;
                 this.drawPoints(poses[0]);
                 for (let i = 5; i <= 10; i++) {
@@ -165,7 +168,7 @@ function addData(data, label) {
     brain.addData(sliced, [label]);
 }
 
-function trainBrain(epochs = 500) {
+function trainBrain(epochs = 1000) {
     brain.normalizeData();
     brain.train({"epochs":epochs}, () => {
         brain.save();
@@ -207,6 +210,20 @@ for (var i=1; i < 49; i++){
     })
 }
 
+for (var i=1; i < 49; i++){
+    videos.push({
+        name: "downWave",
+        src: "training/downWave/down (" + i + ").mp4"
+    })
+}
+
+for (var i=1; i < 49; i++){
+    videos.push({
+        name: "upWave",
+        src: "training/upWave/up (" + i + ").mp4"
+    })
+}
+
 function compareVideo(i){
     video.data = [];
     video.setName(videos[i].name);
@@ -226,13 +243,13 @@ function setup() {
         task: "classification",
         debug: true,
         inputs: 250,
-        outputs: 1
+        outputs: 4
     });
 
     createCanvas(600, 640);
 
     video = new inputVideo(videos[0].name, videos[0].src, () => {
-        //trainVideos(videos, trainBrain);
+        trainVideos(videos, trainBrain);
     });
 }
 
