@@ -105,6 +105,7 @@ class inputVideo {
             self.collecting = false;
             self.video.onended = null;
         }
+        
     }
 
     /**
@@ -147,7 +148,7 @@ class inputVideo {
         let dataPoints = 0;
         if(this.collecting){
             if(poses.length > 0){
-                console.log(poses[0]);
+                // console.log(poses[0]);
                 let pose = poses[0].pose;
                 this.drawPoints(poses[0]);
                 for (let i = 5; i <= 10; i++) {
@@ -178,11 +179,18 @@ function trainBrain(epochs = 1000) {
 let video
 
 function trainVideos(videos, exitFunc, i = 0) {
+    var pad_array = function(arr,len,fill) {
+        return arr.concat(Array(len).fill(fill)).slice(0,len);
+      }
+    console.log(`Video ${i}`);
     video.data = [];
     video.setName(videos[i].name);
     video.loadVideo(videos[i].src, () => {
         video.startTraining(() => {
             i++;
+            if(video.data.length < 864){
+                video.data.length = pad_array(data, 864, null)
+            }
             addData(video.data, video.name);
 
             if (i < videos.length) {
@@ -224,12 +232,20 @@ for (var i=1; i < 49; i++){
     })
 }
 
+
 function compareVideo(i){
+    var pad_array = function(arr,len,fill) {
+        return arr.concat(Array(len).fill(fill)).slice(0,len);
+      }
     video.data = [];
     video.setName(videos[i].name);
     video.loadVideo(videos[i].src, () => {
         video.initClassify(() => {
             video.getFrameData((data) => {
+                if(data.length < 864){
+                    data = pad_array(data, 864, null)
+                }
+                // console.log(data)
                 video.classify(data, (confidence, label) => {
                     console.log("this is a " + label + " with " + (confidence * 100) + "% accuracy.")
                 });
@@ -242,7 +258,7 @@ function setup() {
     brain = ml5.neuralNetwork({
         task: "classification",
         debug: true,
-        inputs: 250,
+        inputs: 864,
         outputs: 4
     });
 
