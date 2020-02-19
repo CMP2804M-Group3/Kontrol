@@ -189,7 +189,7 @@ function trainVideos(videos, exitFunc, i = 0) {
         video.startTraining(() => {
             i++;
             if(video.data.length < 864){
-                video.data.length = pad_array(data, 864, null)
+                video.data.length = pad_array(video.data, 864, null)
             }
             addData(video.data, video.name);
 
