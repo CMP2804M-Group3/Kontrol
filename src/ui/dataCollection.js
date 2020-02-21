@@ -169,7 +169,7 @@ function addData(data, label) {
     brain.addData(sliced, [label]);
 }
 
-function trainBrain(epochs = 2000) {
+function trainBrain(epochs = 200) {
     brain.normalizeData();
     brain.train({"epochs":epochs}, () => {
         brain.save();
@@ -204,14 +204,14 @@ function trainVideos(videos, exitFunc, i = 0) {
 
 let videos = [];
 
-for (var i=1; i < 49; i++){
+for (var i=1; i < 105; i++){
     videos.push({
         name: "leftWave",
         src: "training/leftWave/left (" + i + ").mp4"
     })
 }
 
-for (var i=1; i < 49; i++){
+for (var i=1; i < 100; i++){
     videos.push({
         name: "rightWave",
         src: "training/rightWave/right (" + i + ").mp4"
@@ -225,7 +225,7 @@ for (var i=1; i < 49; i++){
     })
 }
 
-for (var i=1; i < 49; i++){
+for (var i=1; i < 88; i++){
     videos.push({
         name: "upWave",
         src: "training/upWave/up (" + i + ").mp4"
