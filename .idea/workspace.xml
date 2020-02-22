@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="49f3a377-e883-4fb7-960e-db2ace541225" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/ui/dataCollection.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/dataCollection.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1Y8HLobsTs2itLVjlfAvsC9Cr3B" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/json_reading" />
+    </key>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="49f3a377-e883-4fb7-960e-db2ace541225" name="Default Changelist" comment="" />
+      <created>1582317248200</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1582317248200</updated>
+      <workItem from="1582317253645" duration="1617000" />
+      <workItem from="1582321855496" duration="198000" />
+      <workItem from="1582383731396" duration="2199000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1259" height="197" key="GridCell.Tab.0.bottom" timestamp="1582321568020">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state width="1259" height="197" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1582321568020" />
+    <state width="1259" height="197" key="GridCell.Tab.0.center" timestamp="1582321568019">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state width="1259" height="197" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1582321568019" />
+    <state width="1259" height="197" key="GridCell.Tab.0.left" timestamp="1582321568018">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state width="1259" height="197" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1582321568018" />
+    <state width="1259" height="197" key="GridCell.Tab.0.right" timestamp="1582321568019">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state width="1259" height="197" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1582321568019" />
+    <state x="395" y="131" key="git4idea.branch.GitSmartOperationDialog" timestamp="1582318914525">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state x="395" y="131" key="git4idea.branch.GitSmartOperationDialog/0.23.1280.777@0.23.1280.777" timestamp="1582318914525" />
+    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup" timestamp="1582384320532">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.23.1280.777@0.23.1280.777" timestamp="1582384320532" />
+  </component>
+</project>

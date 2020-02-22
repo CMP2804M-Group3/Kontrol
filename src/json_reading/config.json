@@ -1,0 +1,2 @@
+{"gesture_action_bindings": [{"gesture": "leftWave","status": "player", "action": "goBack"},
+{"gesture": "leftWave","status": "menu", "action": "left"}]}
