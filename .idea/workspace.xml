@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="49f3a377-e883-4fb7-960e-db2ace541225" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/ui/dataCollection.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/dataCollection.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/json_reading/config_Readme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/json_reading/json_reader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/json_reading/json_reader_writer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +25,13 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
+    </option>
   </component>
   <component name="ProjectId" id="1Y8HLobsTs2itLVjlfAvsC9Cr3B" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -61,6 +70,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="349" y="221" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1582403329834">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state x="349" y="221" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1280.777@0.23.1280.777" timestamp="1582403329834" />
     <state width="1259" height="197" key="GridCell.Tab.0.bottom" timestamp="1582321568020">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
