@@ -8,11 +8,14 @@ try {
     return
 }
 
-function getActionFromGesture(var gestureName,var status){
-    for(i = 0, i < bindings.length){
-        if (bindings.gesture_action_bindings[i].gesture == gestureName &&
-            bindings.gesture_action_bindings[i].status == status{
+function getActionFromGesture( gestureName, status){
+    for(i = 0; i < bindings.length; i++){
+        if (bindings.gesture_action_bindings[i].gesture === gestureName &&
+            bindings.gesture_action_bindings[i].status === status){
             break;
+        }
+        if (i == binding.length){
+            console.error("Error, no command found for this gesture");
         }
     }
 }
