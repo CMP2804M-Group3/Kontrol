@@ -1,7 +1,14 @@
+
+:root[data-theme = 'dark']
+{
+    --lightBlue: #1CB2BF;
+    --darkBlue: #3D68BE;
+}
+
 :root
 {
-    --lightBlue: #1cb0be;
-    --darkBlue: #3b6abe;
+    --lightBlue: #36D0DC;
+    --darkBlue: #5B87E5;
 }
 
 html,
@@ -50,7 +57,7 @@ p
     font-weight: 300;
     line-height: 1.6;
 
-    margin: 20px 20px 10px;
+    margin: 0px 20px 20px;
 
     color: white;
 }
@@ -218,6 +225,7 @@ h2
     border-radius: 3px;
     background: none;
     background: white;
+    z-index: 100;
 }
 
 .whiteButton:focus
@@ -243,6 +251,8 @@ h2
     border-radius: 3px;
     background: none;
     background: rgba(255,255,255,.25);
+    z-index: 100;
+
 }
 
 .transButton:focus

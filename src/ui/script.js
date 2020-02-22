@@ -10,7 +10,7 @@ let kodiEnabled = false;
 
 window.onload = ()=> {
 
-    loadContent("pages/loading.html");
+    loadContent("pages/welcome.html");
 
     document.getElementById("closeButton").addEventListener("click", function (e) {
         let win = remote.getCurrentWindow();
