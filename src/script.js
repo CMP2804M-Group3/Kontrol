@@ -25,7 +25,7 @@ window.onload = ()=> {
 function loadContent(url, callback) {
     // var win = remote.getCurrentWindow();
     // window.location = ;
-    let file = `src/ui/${url}`;
+    let file = `src/${url}`;
     console.log(file);
     let parent = document.getElementById('parent');
     let old = document.getElementById('inserted');
