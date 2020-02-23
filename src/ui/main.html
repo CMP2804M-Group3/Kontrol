@@ -62,8 +62,9 @@
             </div>
 
                 <script>
+                    const KodiController = require("kodi-controller");
+                    kodi = new KodiController();
                     let win = remote.getCurrentWindow();
-                    let video;
                     win.setSize(1200, 800);
                     $("body").addClass("big");
                     $("html").addClass("big");
@@ -81,20 +82,157 @@
                     // $("body").css("height", 692);
                     // $("html").css("height", 692);
 
-                    function setup(){
-                        let canvas = createCanvas(640, 360);
-                        video = createCapture(VIDEO);
-                        video.size(640, 360)
-                        video.hide();
-                        canvas.parent("title");
-                    }
-                    function draw(){
-                        translate(video.width, 0);
-                        //then scale it by -1 in the x-axis
-                        //to flip the image
-                        scale(-1, 1);
-                        image(video, 0, 0, 640, 360);
+                    const ml5 = require('ml5');
 
+                    let video;
+                    let poseNet;
+                    let pose;
+                    let skeleton;
+                    let canvas;
+
+                    let brain;
+                    let poseLabel = "";
+
+                    let state = 'waiting';
+                    let targetLabel;
+
+
+                    function setup() {
+                        canvas = createCanvas(640, 360);
+                        video = createCapture(VIDEO);
+                        canvas.parent("title");
+                        video.hide();
+                        poseNet = ml5.poseNet(video, modelLoaded);
+                        poseNet.on('pose', gotPoses);
+
+                        let options = {
+                            inputs: 34,
+                            outputs: 4,
+                            task: 'classification',
+                            debug: true
+                        }
+                        brain = ml5.neuralNetwork(options);
+                        
+                        //   LOAD PRETRAINED MODEL
+                        const modelInfo = {
+                            model: 'model/model.json',
+                            metadata: 'model/model_meta.json',
+                            weights: 'model/model.weights.bin'
+                        };
+                        brain.load(modelInfo, brainLoaded);
+
+                        // LOAD TRAINING DATA
+                        // brain.loadData('data.json', dataReady);
+                    }
+
+                    function brainLoaded() {
+                    console.log('pose classification ready!');
+                    classifyPose();
+                    }
+
+                    function classifyPose() {
+                    if (pose) {
+                        let inputs = [];
+                        for (let i = 0; i < pose.keypoints.length; i++) {
+                        let x = pose.keypoints[i].position.x;
+                        let y = pose.keypoints[i].position.y;
+                        inputs.push(x);
+                        inputs.push(y);
+                        }
+                        brain.classify(inputs, gotResult);
+                    } else {
+                        setTimeout(classifyPose, 100);
+                    }
+                    }
+
+                    function gotResult(error, results) {  
+                    // let map = {
+                    //     "Left_arm_up" : kodi.rewind,
+                    //     "Right_arm_up" : kodi.fastForward,
+                    //     "Left_arm_out" : kodi.goPrevious,
+                    //     "Right_arm_out" : kodi.goNext,
+                    //     "T_pose" : kodi.playPause                        
+                    // }
+                    let map = {
+                        "Left_arm_up" : "rewind",
+                        "Right_arm_up" : "fastForward",
+                        "Left_arm_out" : "goPrevious",
+                        "Right_arm_out" : "goNext",
+                        "T_pose" : "playPause"                        
+                    }
+                    if (results[0].confidence > 0.75) {
+                        console.log(results[0].label);
+                        if( results[0].label  === "T_pose"){
+                            kodi.playPause();
+                            setTimeout(classifyPose, 3000);
+                            
+                        }else{
+                            classifyPose();
+                        }
+                    }else{
+                      classifyPose();
+                    }
+                    
+                    }
+
+
+                    function gotPoses(poses) {
+                    // console.log(poses); 
+                    if (poses.length > 0) {
+                        pose = poses[0].pose;
+                        skeleton = poses[0].skeleton;
+                        if (state == 'collecting') {
+                        let inputs = [];
+                        for (let i = 0; i < pose.keypoints.length; i++) {
+                            let x = pose.keypoints[i].position.x;
+                            let y = pose.keypoints[i].position.y;
+                            inputs.push(x);
+                            inputs.push(y);
+                        }
+                        let target = [targetLabel];
+                        brain.addData(inputs, target);
+                        }
+                    }
+                    }
+
+
+                    function modelLoaded() {
+                    console.log('poseNet ready');
+                    }
+
+                    function draw() {
+                    push();
+                    translate(video.width, 0);
+                    scale(-1, 1);
+                    image(video, 0, 0, video.width, video.height);
+
+                    if (pose) {
+                        for (let i = 0; i < skeleton.length; i++) {
+                        let a = skeleton[i][0];
+                        let b = skeleton[i][1];
+                        strokeWeight(2);
+                        stroke(0);
+
+                        line(a.position.x, a.position.y, b.position.x, b.position.y);
+                        }
+                        for (let i = 0; i < pose.keypoints.length; i++) {
+                        let x = pose.keypoints[i].position.x;
+                        let y = pose.keypoints[i].position.y;
+                        fill(0);
+                        if(state == "collecting"){
+                            fill(255, 0,0);
+                        }
+                        stroke(255);
+                        ellipse(x, y, 16, 16);
+                        }
+                    }
+                    pop();
+
+                    fill(255, 0, 255);
+                    noStroke();
+                    textSize(32);
+                    textAlign(CENTER, CENTER);
+                    text(poseLabel, width / 2, height - 20);
                     }
                 </script>
         </div>
