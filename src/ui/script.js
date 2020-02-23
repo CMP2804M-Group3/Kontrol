@@ -10,8 +10,6 @@ let kodiEnabled = false;
 
 window.onload = ()=> {
 
-    loadContent("pages/welcome.html");
-
     document.getElementById("closeButton").addEventListener("click", function (e) {
         let win = remote.getCurrentWindow();
         win.close();
@@ -39,7 +37,7 @@ function loadContent(url, callback) {
             eval($("#inserted script")[0]["text"]);
         }
         catch (e) {
-            //
+            console.log(e);
         }
         if (callback) {
             setTimeout(callback, 500);

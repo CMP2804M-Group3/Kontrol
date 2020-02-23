@@ -22,7 +22,7 @@ function CreateWindow(){
 		win.show();
 	});
 
-	win.loadFile("ui/index.html");
+	win.loadFile("ui/main.html");
 
 	// remove this before complete release
 	win.webContents.openDevTools();
