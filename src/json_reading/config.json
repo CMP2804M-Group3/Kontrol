@@ -1,4 +1,1 @@
-{"gesture_action_bindings": [
-    {"gesture": "leftWave","status": "player", "action": "goBack"},
-    {"gesture": "leftWave","status": "menu", "action": "left"}]
-}
+{"general":{"ip":"joetitts","port":"","theme":""},"gesture_bindings":[{"gesture":"leftWave","status":"player","action":"makeABigBeepNoise"},{"gesture":"leftWave0","status":"menu","action":"left"}]}
