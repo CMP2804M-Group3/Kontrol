@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="49f3a377-e883-4fb7-960e-db2ace541225" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/json_reading/config_Readme" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/json_reading/json_reader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/json_reading/json_reader_writer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/json_reading/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/json_reading/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/json_reading/json_reader_writer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/json_reading/json_reader_writer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +66,7 @@
       <workItem from="1582317253645" duration="1617000" />
       <workItem from="1582321855496" duration="198000" />
       <workItem from="1582383731396" duration="2199000" />
+      <workItem from="1582542192703" duration="2808000" />
     </task>
     <servers />
   </component>
