@@ -1,4 +1,0 @@
-The config.json is to add the ability to change which gesture causes what, whether that be in the player on in the menus.
-Format is as follows:
-"gesture": "relevantGesture","status": "player|menu", "action": "setAction"}
-
