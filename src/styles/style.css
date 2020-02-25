@@ -504,3 +504,7 @@ input[type=number]::-webkit-outer-spin-button
 .greenBG{
     background: rgba(0,255,0,0.3)!important;
 }
+
+#popup{
+    background-color: white;
+}

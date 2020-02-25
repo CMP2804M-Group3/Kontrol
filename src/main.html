@@ -63,228 +63,242 @@
 
                 <script>
                     let win = remote.getCurrentWindow();
-
-                    win.show();
-                    const KodiController = require("kodi-controller");
-
-                    let ip = settings.readSetting("ip");
-                    let port = settings.readSetting("port");
-                    kodi = new KodiController(ip, port);
-
-                    function rewind(){
-                        kodi.rewind();
-                    }
-                    function fastForward(){
-                        kodi.fastForward();
-                    }
-                    function goPrevious(){
-                        kodi.rewind();
-                    }
-                    function goNext(){
-                        kodi.goNext();
-                    }
-                    function playPause(){
-                        kodi.playPause();
-                    }
-                    function volumeUp(){
-                        kodi.volumeUp();
-                    }
-                    function volumeDown(){
-                        kodi.volumeDown();
-                    }
-                    function mute(){
-                        kodi.setVolume(null, 0);
-                    }
-                    win.setSize(1200, 800);
-                    $("body").addClass("big");
-                    $("html").addClass("big");
-
-                    $(".leftPanel li").on( "click", function() {
-                        $(".leftPanel .selected").toggleClass("selected");
-                        $( this ).toggleClass("selected");
-                    });
-
-                    $(".rightPanel li").on( "click", function() {
-                        $(".rightPanel .selected").toggleClass("selected");
-                        $( this ).toggleClass("selected");
-                    });
-
-                    // $("body").css("height", 692);
-                    // $("html").css("height", 692);
-
-                    const ml5 = require('ml5');
-
+                    const ml5 = require( 'ml5' );
+                    const KodiController = require( "kodi-controller" );
                     let video;
                     let poseNet;
                     let pose;
                     let skeleton;
                     let canvas;
-
                     let brain;
+                    let ready = false;
                     let poseLabel = "";
-
                     let state = 'waiting';
                     let targetLabel;
-                    let lastPoses = [1,2,3]
-                    function setItem (array, item, length) {
-                       array.unshift(item) > length ?  array.pop() : null
+                    let lastPoses = [ 1, 2, 3 ];
+
+
+                    $( ".leftPanel li" ).on( "click", function() {
+                        $( ".leftPanel .selected" ).toggleClass( "selected" );
+                        $( this ).toggleClass( "selected" );
+                    } );
+                    $( ".rightPanel li" ).on( "click", function() {
+                        $( ".rightPanel .selected" ).toggleClass( "selected" );
+                        $( this ).toggleClass( "selected" );
+                    } );
+
+
+                    function rewind() {
+                        kodi.rewind();
+                    }
+
+                    function fastForward() {
+                        kodi.fastForward();
+                    }
+
+                    function goPrevious() {
+                        kodi.rewind();
+                    }
+
+                    function goNext() {
+                        kodi.goNext();
+                    }
+
+                    function playPause() {
+                        kodi.playPause();
+                    }
+
+                    function volumeUp() {
+                        kodi.volumeUp();
+                    }
+
+                    function volumeDown() {
+                        kodi.volumeDown();
+                    }
+
+                    function mute() {
+                        kodi.setVolume( null, 0 );
+                    }
+
+                    function setItem( array, item, length ) {
+                        array.unshift( item ) > length ? array.pop() : null
                     }
 
                     function setup() {
-                        canvas = createCanvas(640, 360);
-                        video = createCapture(VIDEO);
-                        canvas.parent("title");
-                        video.hide();
-                        poseNet = ml5.poseNet(video, modelLoaded);
-                        poseNet.on('pose', gotPoses);
-
+                        win.show();
+                        win.setSize( 1200, 800 );
+                        $( "body" ).addClass( "big" );
+                        $( "html" ).addClass( "big" );   
+                        let ip = settings.readSetting( "ip" );
+                        let port = settings.readSetting( "port" );
+                        kodi = new KodiController( ip, port );
+                        canvas = createCanvas( 640, 360 );
+                        
+                        canvas.parent( "title" );
+                        
+                        
                         let options = {
                             inputs: 34,
                             outputs: 4,
                             task: 'classification',
                             debug: true
                         }
-                        brain = ml5.neuralNetwork(options);
-                        
+                        brain = ml5.neuralNetwork( options );
                         //   LOAD PRETRAINED MODEL
                         const modelInfo = {
                             model: 'model/model.json',
                             metadata: 'model/model_meta.json',
                             weights: 'model/model.weights.bin'
                         };
-                        brain.load(modelInfo, brainLoaded);
-
+                        brain.load( modelInfo, brainLoaded );
                         // LOAD TRAINING DATA
                         // brain.loadData('data.json', dataReady);
+                        // window.open( "popup.html", "Allow Webcam", {
+                        //     width: 300,
+                        //     height: 160,
+                        //     frame: false,
+                        //     transparent: true,
+                        //     resizable: false,
+                        //     fullscreen: false,
+                        //     show: false,
+                        //     webPreferences: {
+                        //         nodeIntegration: true
+                        //     }
+                        // } )
+                    }
+
+                    function webCamSetup(){
+                        video = createCapture( VIDEO );
+                        video.hide();
+                        poseNet = ml5.poseNet( video, modelLoaded );
                     }
 
                     function brainLoaded() {
-                    console.log('pose classification ready!');
-                    classifyPose();
+                        console.log( 'pose classification ready!' );
+                        
                     }
 
                     function classifyPose() {
-                    if (pose) {
-                        let inputs = [];
-                        for (let i = 0; i < pose.keypoints.length; i++) {
-                        let x = pose.keypoints[i].position.x;
-                        let y = pose.keypoints[i].position.y;
-                        inputs.push(x);
-                        inputs.push(y);
+                        if ( pose ) {
+                            let inputs = [];
+                            for ( let i = 0; i < pose.keypoints.length; i++ ) {
+                                let x = pose.keypoints[ i ].position.x;
+                                let y = pose.keypoints[ i ].position.y;
+                                inputs.push( x );
+                                inputs.push( y );
+                            }
+                            brain.classify( inputs, gotResult );
+                        } else {
+                            setTimeout( classifyPose, 100 );
                         }
-                        brain.classify(inputs, gotResult);
-                    } else {
-                        setTimeout(classifyPose, 100);
                     }
-                    }
-                    function pass(){
+
+                    function pass() {
                         return;
                     }
-                    function gotResult(error, results) {  
-                    let kMap = {
-                        "Left_arm_up" : rewind,
-                        "Right_arm_up" : fastForward,
-                        "Left_arm_out" : goPrevious,
-                        "Right_arm_out" : goNext,
-                        "T_pose" : playPause,
-                        "Left_arm_90_up" : volumeDown,
-                        "Right_arm_90_up" : volumeUp,
-                        "Both_arms_90_down": mute,
-                        "base": pass,
-                    }
-                    let map = {
-                        "Left_arm_up" : "rewind",
-                        "Right_arm_up" : "fastForward",
-                        "Left_arm_out" : "goPrevious",
-                        "Right_arm_out" : "goNext",
-                        "T_pose" : "playPause",
-                        "Left_arm_90_up" : "volumeDown",
-                        "Right_arm_90_up" : "volumeUp",
-                        "Both_arms_90_down": "mute"
-                    }
-                    $(".greenBG").removeClass("greenBG");
-                    if (results[0].confidence > 0.75) {
-                        setItem(lastPoses, results[0].label, 5);
-                        if(lastPoses.every((i) => {return i == lastPoses[0]})){
-                            console.log("#"+map[results[0].label]);                        
-                            $("#"+map[results[0].label]).addClass("greenBG");  
-                            try{
-                                kMap[results[0].label]();
+
+                    function gotResult( error, results ) {
+                        let kMap = {
+                            "Left_arm_up": rewind,
+                            "Right_arm_up": fastForward,
+                            "Left_arm_out": goPrevious,
+                            "Right_arm_out": goNext,
+                            "T_pose": playPause,
+                            "Left_arm_90_up": volumeDown,
+                            "Right_arm_90_up": volumeUp,
+                            "Both_arms_90_down": mute,
+                            "base": pass,
+                        }
+                        let map = {
+                            "Left_arm_up": "rewind",
+                            "Right_arm_up": "fastForward",
+                            "Left_arm_out": "goPrevious",
+                            "Right_arm_out": "goNext",
+                            "T_pose": "playPause",
+                            "Left_arm_90_up": "volumeDown",
+                            "Right_arm_90_up": "volumeUp",
+                            "Both_arms_90_down": "mute"
+                        }
+                        $( ".greenBG" ).removeClass( "greenBG" );
+                        if ( results[ 0 ].confidence > 0.75 ) {
+                            setItem( lastPoses, results[ 0 ].label, 5 );
+                            if ( lastPoses.every( ( i ) => {
+                                    return i == lastPoses[ 0 ]
+                                } ) ) {
+                                console.log( "#" + map[ results[ 0 ].label ] );
+                                $( "#" + map[ results[ 0 ].label ] ).addClass( "greenBG" );
+                                try {
+                                    kMap[ results[ 0 ].label ]();
+                                } catch ( e ) {
+                                    console.log( e );
+                                }
+                                setTimeout( classifyPose, 1000 );
+                            } else {
+                                classifyPose();
                             }
-                            catch(e){
-                                console.log(e);
-                            }
-                            setTimeout(classifyPose, 1000);
-                        }else{
+                        } else {
                             classifyPose();
                         }
-                             
-                        
-
-                    }else{
-                      classifyPose();
-                    }
-                    
                     }
 
-
-                    function gotPoses(poses) {
-                    // console.log(poses); 
-                    if (poses.length > 0) {
-                        pose = poses[0].pose;
-                        skeleton = poses[0].skeleton;
-                        if (state == 'collecting') {
-                        let inputs = [];
-                        for (let i = 0; i < pose.keypoints.length; i++) {
-                            let x = pose.keypoints[i].position.x;
-                            let y = pose.keypoints[i].position.y;
-                            inputs.push(x);
-                            inputs.push(y);
-                        }
-                        let target = [targetLabel];
-                        brain.addData(inputs, target);
+                    function gotPoses( poses ) {
+                        // console.log(poses); 
+                        if ( poses.length > 0 ) {
+                            pose = poses[ 0 ].pose;
+                            skeleton = poses[ 0 ].skeleton;
+                            if ( state == 'collecting' ) {
+                                let inputs = [];
+                                for ( let i = 0; i < pose.keypoints.length; i++ ) {
+                                    let x = pose.keypoints[ i ].position.x;
+                                    let y = pose.keypoints[ i ].position.y;
+                                    inputs.push( x );
+                                    inputs.push( y );
+                                }
+                                let target = [ targetLabel ];
+                                brain.addData( inputs, target );
+                            }
                         }
                     }
-                    }
-
 
                     function modelLoaded() {
-                    console.log('poseNet ready');
+                        console.log( 'poseNet ready' );
+                        poseNet.on( 'pose', gotPoses );
+                        ready = true;
+                        setTimeout(classifyPose);
                     }
 
                     function draw() {
-                    push();
-                    translate(video.width, 0);
-                    scale(-1, 1);
-                    image(video, 0, 0, video.width, video.height);
-
-                    if (pose) {
-                        for (let i = 0; i < skeleton.length; i++) {
-                        let a = skeleton[i][0];
-                        let b = skeleton[i][1];
-                        strokeWeight(2);
-                        stroke(0);
-
-                        line(a.position.x, a.position.y, b.position.x, b.position.y);
+                        if (ready){
+                            push();
+                            translate( video.width, 0 );
+                            scale( -1, 1 );
+                            image( video, 0, 0, video.width, video.height );
+                            if ( pose ) {
+                                for ( let i = 0; i < skeleton.length; i++ ) {
+                                    let a = skeleton[ i ][ 0 ];
+                                    let b = skeleton[ i ][ 1 ];
+                                    strokeWeight( 2 );
+                                    stroke( 0 );
+                                    line( a.position.x, a.position.y, b.position.x, b.position.y );
+                                }
+                                for ( let i = 5; i < pose.keypoints.length; i++ ) {
+                                    let x = pose.keypoints[ i ].position.x;
+                                    let y = pose.keypoints[ i ].position.y;
+                                    fill( 0 );
+                                    if ( state == "collecting" ) {
+                                        fill( 255, 0, 0 );
+                                    }
+                                    stroke( 255 );
+                                    ellipse( x, y, 16, 16 );
+                                }
+                            }
+                            pop();
+                            fill( 255, 0, 255 );
+                            noStroke();
+                            textSize( 32 );
+                            textAlign( CENTER, CENTER );
+                            text( poseLabel, width / 2, height - 20 );
                         }
-                        for (let i = 5; i < pose.keypoints.length; i++) {
-                        let x = pose.keypoints[i].position.x;
-                        let y = pose.keypoints[i].position.y;
-                        fill(0);
-                        if(state == "collecting"){
-                            fill(255, 0,0);
-                        }
-                        stroke(255);
-                        ellipse(x, y, 16, 16);
-                        }
-                    }
-                    pop();
-
-                    fill(255, 0, 255);
-                    noStroke();
-                    textSize(32);
-                    textAlign(CENTER, CENTER);
-                    text(poseLabel, width / 2, height - 20);
                     }
                 </script>
         </div>
