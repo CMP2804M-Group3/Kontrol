@@ -1,12 +1,62 @@
 const { remote } = require('electron');
 const $ = require('jquery');
+const fs = require('fs');
 const kodiController = require('kodi-controller');
 const Kodi = new kodiController();
-
-const fs = require('fs');
 const { BrowserWindow } = remote;
 
 let kodiEnabled = false;
+
+let configPath = "src/config.json"
+
+
+class JSONReader{
+    constructor(src){
+        this.src = src;
+        let json = fs.readFileSync(this.src);
+        this.JSONData = JSON.parse(json);
+    }
+
+    save(callback){
+        var jsonContent = JSON.stringify(this.JSONData);
+        fs.writeFile(this.src, jsonContent, 'utf8', callback);
+    }
+
+    getActionFromGesture(gestureName, status){
+        for(let i in this.JSONData.gesture_bindings){
+            let binding = this.JSONData.gesture_bindings[i];
+            if (binding.gesture === gestureName && binding.status === status){
+                return binding;
+            }
+        }
+        console.error("Error, no command found for this gesture");
+    }
+    
+    overwriteSetting(settingName, value){
+        this.JSONData.general[settingName] = value;        
+    }
+    readSetting(settingName){
+        return this.JSONData.general[settingName];
+    }
+    
+    overwriteAction(gestureName, status, newAction){
+        let newBinding ={"gesture": gestureName,"status": status, "action": newAction};
+
+        for(let i in this.JSONData.gesture_bindings){
+            let binding = this.JSONData.gesture_bindings[i];
+            if (binding.gesture === gestureName && binding.status === status){
+                this.JSONData.gesture_bindings[i] = newBinding;
+                console.log(this.JSONData.gesture_bindings[i]);
+            }
+        }
+    }
+    
+}
+
+let settings = new JSONReader(configPath);
+
+
+
 
 window.onload = ()=> {
 
@@ -46,3 +96,16 @@ function loadContent(url, callback) {
     });
 }
 // win.loadURL();
+
+function readIP(){
+    let win = remote.getCurrentWindow();
+    let ip = $("#IP")[0].value;
+    let port = $("#port")[0].value;
+    
+    settings.overwriteSetting("ip", ip);
+    settings.overwriteSetting("port", port);
+    settings.save(() => {
+        win.hide();
+        win.loadFile("main.html");
+    });
+}
