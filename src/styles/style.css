@@ -142,7 +142,7 @@ li
 {
     position: absolute;
     top: 163px;
-    right: 117px;
+    right: 130px;
 
     height: 325px;
 
@@ -343,6 +343,12 @@ ul li
     cursor: pointer;
 
     align-items: center;
+
+}
+
+#kodiList li{
+    margin-left: 13px;
+    width: 362px;
 }
 
 ul li h2
@@ -360,6 +366,8 @@ ul li h2
 
 #kodiList
 {
+    height: 144px;
+    overflow: auto;
     padding-left: 0;
 }
 
@@ -434,11 +442,14 @@ input:placeholder-shown ~ label
 {
     color: #05739e !important ;
 }
-.input-field input:focus,
-.input-field input:valid
-{
+.input-field input:focus{
     border-color: #05739e;
     background-color: white;
+}
+.input-field input:valid:not(:focus){
+    border-color: #59896d !important;
+    border-bottom-width: 6px;
+    border-bottom-style: solid;
 }
 .input-field input:not(:placeholder-shown):not(:focus):invalid
 {
@@ -455,14 +466,16 @@ input:placeholder-shown ~ label
     color: #9e3a34;
 }
 
-.input-field input:focus ~ label,
-.input-field input:valid ~ label
+.input-field input:focus ~ label{
+    font-size: 11px;
+    top: -14px;
+    color: #05739e !important ;
+}
+.input-field input:valid:not(:focus)~ label
 {
     font-size: 11px;
-
     top: -14px;
-
-    color: #05739e !important ;
+    color: #59896d !important ;
 }
 
 
@@ -507,4 +520,18 @@ input[type=number]::-webkit-outer-spin-button
 
 #popup{
     background-color: white;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 17px;
+}
+
+/* Track */
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: white;
+    background-clip: padding-box;
+    border-right: 13px rgba(0,0,0,0) solid;
 }

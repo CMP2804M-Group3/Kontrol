@@ -9,30 +9,28 @@
     <script>
         console.log("Searching for Kodi...");
         // The code for this isn't ready yet
-        if (kodiEnabled){
-            setTimeout( () => {
-                Kodi.scanForKodis((err, data) => {
-                    if (data.length !== 0){
-                        console.log(data);
-                        loadContent("pages/foundKodis.html", () => {
-                            var parent = document.getElementById('kodiList');
-                            for (let i = 0; i < data.length; i++) {
-                                parent.insertAdjacentHTML("beforeend",
-                                    `<li tabindex="0"><img class = "wifi" src="images/wifi-full.svg" draggable="false"><h2>${data[i]}</h2></li>`
-                                );
 
-                            }
-                        });
-                    }else{
-                        loadContent("pages/manual.html");
-                    }
+        setTimeout( () => {
+            Kodi.scanForKodis((err, data) => {
+                if (data.length !== 0){
+                    console.log(data);
+                    loadContent("pages/foundKodis.html", () => {
+                        var parent = document.getElementById('kodiList');
+                        for (let i = 0; i < data.length; i++) {
+                            parent.insertAdjacentHTML("beforeend",
+                                `<li tabindex="0"><img class = "wifi" src="images/wifi-full.svg" draggable="false"><h2>${data[i]}</h2></li>`
+                            );
 
-                }, 8080, 500);
+                        }
+                    });
+                }else{
+                    loadContent("pages/manual.html");
+                }
 
-            }, 1000);
-        } else{
-            setTimeout( () => { loadContent("pages/enableRemoteControl.html") }, 5000);
-        }
+            }, 8080, 500);
+
+        }, 100);
+
 
     </script>
 </div>

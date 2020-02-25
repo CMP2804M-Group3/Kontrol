@@ -1,9 +1,8 @@
-const { remote } = require('electron');
+const { remote, BrowserWindow, screen } = require('electron');
 const $ = require('jquery');
 const fs = require('fs');
 const kodiController = require('kodi-controller');
 const Kodi = new kodiController();
-const { BrowserWindow } = remote;
 
 let kodiEnabled = false;
 
@@ -55,7 +54,13 @@ class JSONReader{
 
 let settings = new JSONReader(configPath);
 
-
+function startScan(){
+    if(kodiEnabled){
+        loadContent("pages/loading.html");
+    }else{
+        loadContent("pages/enableRemoteControl.html");
+    }
+}
 
 
 window.onload = ()=> {

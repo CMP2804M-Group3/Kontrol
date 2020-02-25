@@ -4,14 +4,15 @@
 			<ol>
 				<li>Navigate to <b>Settings</b> then <b>Control</b>.</li>
 				<li>Enable the three <b>Allow remote control</b> options.</li>
-				<li>Finaly, <b>Rescan</b> to try find Kodi again.</li>
+				<li>Finally, <b>Rescan</b> to try find Kodi again.</li>
 			</ol>
 		</div>
 	<div class="bottomRight center">
-			<button class="whiteButton" id = "rescanButton" onclick=
-					"(function(){ kodiEnabled = true; loadContent('pages/loading.html') })();"
-			>Scan</button>
+
 		<button class="transButton" onclick="loadContent('pages/manual.html')">Know the IP?</button>
+		<button class="whiteButton" id = "connectButton" onclick=
+				"(function(){ kodiEnabled = true; loadContent('pages/loading.html') })();"
+		>Scan</button>
 
 	</div>
 	<div class="bottomLeft">

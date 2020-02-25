@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="styles/style.css">
     <script src="p5.min.js"></script>
     <script src="script.js"></script>
-    <script src="webcam.js"></script>
     <title>Kontrol</title>
 </head>
 <body>
@@ -127,6 +126,7 @@
                     function setup() {
                         win.show();
                         win.setSize( 1200, 800 );
+                        win.center();
                         $( "body" ).addClass( "big" );
                         $( "html" ).addClass( "big" );   
                         let ip = settings.readSetting( "ip" );
@@ -298,6 +298,19 @@
                             textSize( 32 );
                             textAlign( CENTER, CENTER );
                             text( poseLabel, width / 2, height - 20 );
+                        }else{
+                            background("#e6efe9");
+                            push();
+                            translate(320, 180);
+                            fill(0);
+                            rect(-50, -25, 75, 50, 5);
+                            beginShape();
+                            vertex(30, -5);
+                            vertex(55, -25);
+                            vertex(55, 30);
+                            vertex(30, 10);
+                            endShape(CLOSE);
+                            pop();
                         }
                     }
                 </script>

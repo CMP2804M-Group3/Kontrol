@@ -8,13 +8,13 @@
         </div>
 
         <div class="input-field">
-            <input type="number" placeholder=" " id="port" required min="0" max="65535"/>
+            <input title= "Please enter a valid port, 0:65535" type="number" placeholder=" " id="port" required min="0" max="65535"/>
             <label for="port">Port</label>
         </div>
 
     </div>
     <div class="bottomRight center">
-        <button class="transButton" id = "rescanButton" onclick="loadContent('pages/loading.html')">Rescan</button>
+        <button class="transButton" id = "rescanButton" onclick="startScan()">Rescan</button>
         <button class="whiteButton" id = "connectButton" onclick="readIP()">Connect</button>
     </div>
     <div class="bottomLeft">
