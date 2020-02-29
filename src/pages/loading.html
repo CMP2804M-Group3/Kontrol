@@ -11,7 +11,7 @@
         // The code for this isn't ready yet
 
         setTimeout( () => {
-            Kodi.scanForKodis((err, data) => {
+            kodi.scanForKodis((err, data) => {
                 if (data.length !== 0){
                     console.log(data);
                     loadContent("pages/foundKodis.html", () => {
@@ -20,8 +20,11 @@
                             parent.insertAdjacentHTML("beforeend",
                                 `<li tabindex="0"><img class = "wifi" src="images/wifi-full.svg" draggable="false"><h2>${data[i]}</h2></li>`
                             );
-
                         }
+                        $( "#kodiList li" ).on( "click", function() {
+                            $( "#kodiList li" ).removeClass( "selected" );
+                            $( this ).toggleClass( "selected" );
+                        });
                     });
                 }else{
                     loadContent("pages/manual.html");

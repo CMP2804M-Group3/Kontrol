@@ -1,1 +1,1 @@
-{"general":{"ip":"129.169.12.1","port":"402","theme":""},"gesture_bindings":[{"gesture":"leftWave","status":"player","action":"makeABigBeepNoise"},{"gesture":"leftWave0","status":"menu","action":"left"}]}
+{"general":{"ip":"192.168.0.12","port":8080,"theme":""},"gesture_bindings":[{"gesture":"leftWave","status":"player","action":"makeABigBeepNoise"},{"gesture":"leftWave0","status":"menu","action":"left"}]}

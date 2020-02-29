@@ -2,11 +2,11 @@ const { remote, BrowserWindow, screen } = require('electron');
 const $ = require('jquery');
 const fs = require('fs');
 const kodiController = require('kodi-controller');
-const Kodi = new kodiController();
+let kodi = new kodiController();
 
 let kodiEnabled = false;
 
-let configPath = "src/config.json"
+let configPath = "src/config.json";
 
 
 class JSONReader{
@@ -75,6 +75,10 @@ window.onload = ()=> {
         win.minimize();
     });
 
+
+
+
+
 };
 
 function loadContent(url, callback) {
@@ -100,8 +104,42 @@ function loadContent(url, callback) {
         }
     });
 }
-// win.loadURL();
 
+function setItem( array, item, length ) {
+    array.unshift( item ) > length ? array.pop() : null
+}
+
+function rewind() {
+    kodi.rewind();
+}
+
+function fastForward() {
+    kodi.fastForward();
+}
+
+function goPrevious() {
+    kodi.rewind();
+}
+
+function goNext() {
+    kodi.goNext();
+}
+
+function playPause() {
+    kodi.playPause();
+}
+
+function volumeUp() {
+    kodi.volumeUp();
+}
+
+function volumeDown() {
+    kodi.volumeDown();
+}
+
+function mute() {
+    kodi.setVolume( null, 0 );
+}
 function readIP(){
     let win = remote.getCurrentWindow();
     let ip = $("#IP")[0].value;
@@ -113,4 +151,17 @@ function readIP(){
         win.hide();
         win.loadFile("main.html");
     });
+}
+
+function selectFromScan() {
+    let win = remote.getCurrentWindow();
+    let ip = $( "#kodiList li.selected h2" ).text();
+    let port = 8080;
+    settings.overwriteSetting("ip", ip);
+    settings.overwriteSetting("port", port);
+    settings.save(() => {
+        win.hide();
+        win.loadFile("main.html");
+    });
+
 }
