@@ -14,8 +14,13 @@
 .big{
     height: 792px;
     width: 1192px;
-
 }
+
+.webcamPopup{
+    height: 172px;
+    width: 342px;
+}
+
 html,
 body
 {
@@ -41,6 +46,17 @@ body
 
     background-image: linear-gradient(to bottom left, var(--lightBlue), var(--darkBlue));
     background-repeat: no-repeat;
+}
+
+.webcamPopupContainer{
+    height: 100%;
+
+    background-image: linear-gradient(to bottom left, white, snow);
+    background-repeat: no-repeat;
+}
+
+.webcamPopupContainer #parent .title h1{
+    color: black;
 }
 
 h1
@@ -180,6 +196,11 @@ li
     padding-left: 20px;
 }
 
+.popupWinB{
+    filter: none !important;
+}
+
+
 #minimise
 {
     width: 33px;
@@ -212,7 +233,15 @@ li
 {
     outline: 0;
 }
-
+.webcamPopupContent h2{
+    color: black;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.webcamPopupContent p{
+    color: black;
+    margin-top: 0;
+}
 .content h1
 {
     padding-left: 20px;
@@ -240,6 +269,25 @@ h2
     border-radius: 3px;
     background: none;
     background: white;
+    z-index: 100;
+}
+
+.blueButton
+{
+    font-family: 'Roboto-Medium', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+
+    width: 80px;
+    height: 32px;
+    margin: 5px;
+
+    cursor: pointer;
+
+    color: white;
+    border: none;
+    border-radius: 3px;
+    background: #05739e;
     z-index: 100;
 }
 
@@ -271,6 +319,10 @@ h2
 }
 
 .transButton:focus
+{
+    outline: 0;
+}
+.blueButton:focus
 {
     outline: 0;
 }
@@ -520,8 +572,17 @@ input[type=number]::-webkit-outer-spin-button
 
 #popup{
     background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+#popup h1{
+    color: black;
+    font-family: 'Roboto-Medium', sans-serif;
+}
+#popup p{
+    color: black;
+    font-family: 'Roboto-Light', sans-serif;
+}
 /* width */
 ::-webkit-scrollbar {
     width: 17px;

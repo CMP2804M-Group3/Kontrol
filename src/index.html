@@ -31,7 +31,17 @@
 		</div>
 	</div>
 	<script>
-		loadContent("pages/welcome.html")
+		let networkDetails = gotIPandPort();
+		if (networkDetails){
+			loadContent("pages/returning.html", () =>{
+				$("#IP")[0].value = networkDetails[0];
+				$("#port")[0].value = networkDetails[1];
+			});
+		}else{
+			loadContent("pages/welcome.html")
+		}
+
+
 	</script>
 </body>
 </html>

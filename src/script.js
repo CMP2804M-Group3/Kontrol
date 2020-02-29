@@ -1,4 +1,5 @@
-const { remote, BrowserWindow, screen } = require('electron');
+const remote = require('electron').remote;
+const BrowserWindow = remote.BrowserWindow;
 const $ = require('jquery');
 const fs = require('fs');
 const kodiController = require('kodi-controller');
@@ -53,7 +54,19 @@ class JSONReader{
 }
 
 let settings = new JSONReader(configPath);
+function quitApp() {
+    let wins = BrowserWindow.getAllWindows();
 
+    for (let i = 0; i < wins.length; i++) {
+        let path = wins[i].getURL();
+        let file = path.substr(path.lastIndexOf("/")+1);
+        if (file !== "popup.html"){
+            wins[i].close();
+        }
+    }
+    let win = remote.getCurrentWindow();
+    win.close();
+}
 function startScan(){
     if(kodiEnabled){
         loadContent("pages/loading.html");
@@ -61,7 +74,15 @@ function startScan(){
         loadContent("pages/enableRemoteControl.html");
     }
 }
+function webcamAllow(){
+    settings.overwriteSetting("webcamEnabled", "true");
+    settings.save(() => {
+        let win = remote.getCurrentWindow();
+        win.close();
+    });
 
+
+}
 
 window.onload = ()=> {
 
@@ -75,11 +96,18 @@ window.onload = ()=> {
         win.minimize();
     });
 
-
-
-
-
 };
+
+function gotIPandPort() {
+    let ip = settings.readSetting("ip");
+    let port = settings.readSetting("port");
+    if (ip !== "" && port !== ""){
+        return [ip, port]
+    }else{
+        return false
+    }
+
+}
 
 function loadContent(url, callback) {
     // var win = remote.getCurrentWindow();
@@ -140,17 +168,21 @@ function volumeDown() {
 function mute() {
     kodi.setVolume( null, 0 );
 }
+
 function readIP(){
     let win = remote.getCurrentWindow();
-    let ip = $("#IP")[0].value;
-    let port = $("#port")[0].value;
-    
-    settings.overwriteSetting("ip", ip);
-    settings.overwriteSetting("port", port);
-    settings.save(() => {
-        win.hide();
-        win.loadFile("main.html");
-    });
+    if($("#IP")[0] === $("#IP:valid")[0] && $("#port")[0] === $("#port:valid")[0]){
+        let ip = $("#IP")[0].value;
+        let port = $("#port")[0].value;
+
+        settings.overwriteSetting("ip", ip);
+        settings.overwriteSetting("port", port);
+        settings.save(() => {
+            win.hide();
+            win.loadFile("main.html");
+        });
+    }
+
 }
 
 function selectFromScan() {

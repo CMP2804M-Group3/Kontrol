@@ -40,9 +40,9 @@
 
                 <div class="centrePanel" id = "centre">
                     <h1 class="bigTitle" id = "title">Gestures</h1>
-
-                    <h2>Copy the poses as they appear.</h2>
-                    <p>You can practice each gesture as many times as you like, just choose another from the list on the right when you're ready to move on.</p>
+                    <h2>We need your permission to use the webcam!</h2>
+<!--                    <h2>Copy the poses as they appear.</h2>-->
+<!--                    <p>You can practice each gesture as many times as you like, just choose another from the list on the right when you're ready to move on.</p>-->
                     
                 </div>
                 <div class = "rightPanel">
@@ -59,8 +59,8 @@
                     </ul>
                 </div>
             </div>
-
                 <script>
+                    const dialog = require('electron').remote.dialog;
                     const ml5 = require( 'ml5' );
                     let video, poseNet, pose, skeleton, canvas, brain;
                     let win = remote.getCurrentWindow();
@@ -68,6 +68,7 @@
                     let poseLabel = "";
                     let state = 'waiting';
                     let lastPoses = [ 1, 2, 3 ];
+                    let settingsWin;
 
                     let map = {
                         "Left_arm_up": rewind,
@@ -79,9 +80,6 @@
                         "Right_arm_90_up": volumeUp,
                         "Both_arms_90_down": mute
                     };
-
-
-
 
                     $( ".leftPanel li" ).on( "click", function() {
                         $( ".leftPanel .selected" ).toggleClass( "selected" );
@@ -127,7 +125,7 @@
                             metadata: 'model/model_meta.json',
                             weights: 'model/model.weights.bin'
                         };
-                        brain.load( modelInfo);
+                        brain.load( modelInfo, showPopup);
 
                     }
 
@@ -138,6 +136,33 @@
                         video = createCapture( VIDEO );
                         video.hide();
                         poseNet = ml5.poseNet( video, modelLoaded );
+                    }
+                    
+                    function showPopup() {
+                        settingsWin = new BrowserWindow({
+                            width: 350,
+                            height: 180,
+                            frame: false,
+                            transparent: true,
+                            fullScreenable: false,
+                            maximizable: false,
+                            resizable: false,
+                            fullscreen: false,
+                            show: true,
+                            webPreferences: {
+                                nodeIntegration: true
+                            }
+                        });
+                        settingsWin.loadFile("popup.html");
+                        $("html").css("pointer-events", "none");
+                        settingsWin.setAlwaysOnTop(true);
+                        settingsWin.on("closed", () => {
+                            settingsWin = null;
+                            $("html").css("pointer-events", "all");
+                            webCamSetup();
+                        });
+
+
                     }
 
                     /**
