@@ -78,7 +78,8 @@
                         "T_pose": playPause,
                         "Left_arm_90_up": volumeDown,
                         "Right_arm_90_up": volumeUp,
-                        "Both_arms_90_down": mute
+                        "Both_arms_90_down": mute,
+                        "base": passFunc
                     };
 
                     $( ".leftPanel li" ).on( "click", function() {
@@ -89,6 +90,7 @@
                         $( ".rightPanel .selected" ).toggleClass( "selected" );
                         $( this ).toggleClass( "selected" );
                     } );
+                    function passFunc(){};
 
                     /**
                      * Setup is run once when the file is loaded, sets up the window the neural network and the
