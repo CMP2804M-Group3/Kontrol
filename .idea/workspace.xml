@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="af81014b-5f8b-4f63-9f87-3133ac64a070" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/settings.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/foundKodis.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/foundKodis.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/loading.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/loading.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/returning.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/returning.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/popup.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/popup.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,7 +12,13 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Joseph Pitts &lt;joepittsy@gmail.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SIGN_OFF_COMMIT" value="true" />
   </component>
   <component name="ProjectId" id="1XhxCp02NrryzETQLaRJWQU7Gzj" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -85,8 +84,16 @@
       <workItem from="1581513176661" duration="245000" />
       <workItem from="1582647002113" duration="7560000" />
       <workItem from="1582979325455" duration="18253000" />
-      <workItem from="1583082345065" duration="699000" />
+      <workItem from="1583082345065" duration="829000" />
     </task>
+    <task id="LOCAL-00001" summary="Added the settings page, not populated yet.">
+      <created>1583083125197</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1583083125197</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -104,5 +111,13 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
+    <MESSAGE value="Added the settings page, not populated yet." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added the settings page, not populated yet." />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>
