@@ -5,14 +5,29 @@ let win;
 // Creates the electron window.
 function CreateWindow(){
 	win = new BrowserWindow({
-		width: 800,
-		height: 600,
+		width: 400,
+		height: 300,
+		frame: false,
+		transparent: true,
+		fullScreenable: false,
+		maximizable: false,
+		resizable: false,
+		fullscreen: false,
+		show: false,
 		webPreferences: {
-			nodeIntegration: true
+			nodeIntegration: true,
+			nativeWindowOpen: true
 		}
 	});
+	win.setMenu(null);
+	// this should stop the user from fullscreening from double clicking the title bar
+	win.setFullScreenable(false);win.setMaximizable(false); win.isResizable(false);
 
-	win.loadFile("ui/index.html");
+	win.webContents.on('dom-ready', function () {
+		win.show();
+	});
+
+	win.loadFile("index.html");
 
 	// remove this before complete release
 	win.webContents.openDevTools();
@@ -20,9 +35,12 @@ function CreateWindow(){
 	win.on("closed", () => {
 		win = null;
 	});
-}
 
-app.on("ready", CreateWindow);
+
+
+}
+app.on('ready', () => setTimeout(CreateWindow, 500));
+// app.on("ready", CreateWindow);
 
 app.on("window-all-closed", () => {
 	app.quit();
@@ -32,4 +50,5 @@ app.on("activate", () => {
 	if (win === null){
 		CreateWindow();
 	}
-})
+});
+

@@ -1,0 +1,9 @@
+<svg id="Component_7_1" data-name="Component 7 – 1" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+  <circle id="Ellipse_1" data-name="Ellipse 1" cx="15" cy="15" r="15" fill="#fff"/>
+  <path id="Path_3" data-name="Path 3" d="M0,0H24V24H0ZM0,0H24V24H0Z" transform="translate(3 3)" fill="none"/>
+  <g id="Group_5" data-name="Group 5" transform="translate(-1030 -304)">
+    <path id="Path_4" data-name="Path 4" d="M2.06,10.06a1.386,1.386,0,0,0,1.87.1,12.745,12.745,0,0,1,16.13-.01,1.414,1.414,0,1,0,1.79-2.19,15.588,15.588,0,0,0-19.69,0,1.411,1.411,0,0,0-.1,2.1Z" transform="translate(1033 307)" fill="#0093b2"/>
+    <path id="Path_5" data-name="Path 5" d="M6.09,14.09a1.411,1.411,0,0,0,1.83.13,7.064,7.064,0,0,1,8.16,0,1.423,1.423,0,0,0,1.83-.13l.01-.01a1.394,1.394,0,0,0-.13-2.11,9.909,9.909,0,0,0-11.58,0,1.4,1.4,0,0,0-.12,2.12Z" transform="translate(1033 307)" fill="#0093b2"/>
+    <path id="Path_6" data-name="Path 6" d="M9.82,17.82l1.47,1.47a1,1,0,0,0,1.41,0l1.47-1.47a1,1,0,0,0-.23-1.59,4.281,4.281,0,0,0-3.91,0,1.012,1.012,0,0,0-.21,1.59Z" transform="translate(1033 307)" fill="#0093b2"/>
+  </g>
+</svg>

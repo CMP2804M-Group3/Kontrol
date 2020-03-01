@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" class="big">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="p5.min.js"></script>
+    <script src="script.js"></script>
+    <title>Kontrol</title>
+</head>
+<body class="big">
+    <div class="container">
+		<div class="parent" id = "parent">
+			<div class="topBar">  </div>
+			<div class="title"> <h1>Kontrol</h1> </div>
+			<div class="windowButtons">
+				<div class = "buttons">
+					<button id = "minimise">
+						<svg viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg">
+							<line x1="1" y1="3" x2="5" y2="3" stroke="black"
+								  stroke-linecap="round" />
+						</svg>
+					</button>
+					<button id = "closeButton">
+						<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M18.3 5.71c-.39-.39-1.02-.39-1.41 0L12 10.59 7.11 5.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L10.59 12 5.7 16.89c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 13.41l4.89 4.89c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z"/></svg>
+					</button>
+				</div>
+            </div>
+            <div id = "inserted">
+                <div class = "leftPanel">
+                    <ul class = "panelList">
+                        <li tabindex="0" id = "gestures" class="selected"><img class = "wifi" src="images/wave.svg" draggable="false"><h2>Gestures</h2></li>
+                        <li tabindex="0" id = "connection "><img class = "wifi" src="images/wifi.svg" draggable="false"><h2>Connection</h2></li>
+                        <li tabindex="0" id = "settings"><img class = "wifi" src="images/settings.svg" draggable="false"><h2>Settings</h2></li>
+                        <li tabindex="0" id = "help"><img class = "wifi" src="images/help.svg" draggable="false"><h2>Help</h2></li>
+                    </ul>
+                </div>
+
+                <div class="centrePanel" id = "centre">
+                    <h1 class="bigTitle" id = "title">Gestures</h1>
+                    <h2>We need your permission to use the webcam!</h2>
+<!--                    <h2>Copy the poses as they appear.</h2>-->
+<!--                    <p>You can practice each gesture as many times as you like, just choose another from the list on the right when you're ready to move on.</p>-->
+                    
+                </div>
+                <div class = "rightPanel">
+                    <ul class = "panelList">
+                        <li id = "playPause" tabindex="0" class="selected"><img class = "wifi" src="images/pause.svg" draggable="false"><h2>Play/Ok</h2></li>
+                        <li id = "rewind" tabindex="0"><img class = "wifi" src="images/rewind.svg" draggable="false"><h2>Rewind</h2></li>
+                        <li id = "fastForward" tabindex="0"><img class = "wifi" src="images/fast-forward.svg" draggable="false"><h2>Fast Forward</h2></li>
+                        <li id = "goPrevious" tabindex="0"><img class = "wifi" src="images/back.svg" draggable="false"><h2>Previous</h2></li>
+                        <li id = "goNext" tabindex="0"><img class = "wifi" src="images/next.svg" draggable="false"><h2>Next</h2></li>
+                        <li id = "volumeDown" tabindex="0"><img class = "wifi" src="images/volume_down-24px.svg" draggable="false"><h2>Volume Down</h2></li>
+                        <li id = "volumeUp" tabindex="0"><img class = "wifi" src="images/volume_up-24px.svg" draggable="false"><h2>Volume Up</h2></li>
+                        <li id = "mute" tabindex="0"><img class = "wifi" src="images/volume_off-24px.svg" draggable="false"><h2>Mute/Unmute</h2></li>
+
+                    </ul>
+                </div>
+            </div>
+                <script>
+                    const dialog = require('electron').remote.dialog;
+                    const ml5 = require( 'ml5' );
+                    let video, poseNet, pose, skeleton, canvas, brain;
+                    let win = remote.getCurrentWindow();
+                    let ready = false;
+                    let poseLabel = "";
+                    let state = 'waiting';
+                    let lastPoses = [ 1, 2, 3 ];
+                    let settingsWin;
+
+                    let map = {
+                        "Left_arm_up": rewind,
+                        "Right_arm_up": fastForward,
+                        "Left_arm_out": goPrevious,
+                        "Right_arm_out": goNext,
+                        "T_pose": playPause,
+                        "Left_arm_90_up": volumeDown,
+                        "Right_arm_90_up": volumeUp,
+                        "Both_arms_90_down": mute,
+                        "base": passFunc
+                    };
+
+                    $( ".leftPanel li" ).on( "click", function() {
+                        $( ".leftPanel .selected" ).toggleClass( "selected" );
+                        $( this ).toggleClass( "selected" );
+                    } );
+                    $( ".rightPanel li" ).on( "click", function() {
+                        $( ".rightPanel .selected" ).toggleClass( "selected" );
+                        $( this ).toggleClass( "selected" );
+                    } );
+                    function passFunc(){};
+
+                    /**
+                     * Setup is run once when the file is loaded, sets up the window the neural network and the
+                     * canvas.
+                     */
+                    function setup() {
+                        /* Show the window resize it and move it to the centre of the window. */
+                        win.show();
+                        win.setSize( 1200, 800 );
+                        win.center();
+
+                        /* Read the IP & Port from the settings file and create a
+                           kodi controller instance with those details. */
+                        let ip = settings.readSetting( "ip" );
+                        let port = settings.readSetting( "port" );
+                        kodi = new kodiController( ip, port );
+
+                        /* Create a canvas and insert it under the title. */
+                        canvas = createCanvas( 640, 360 );
+                        canvas.parent( "title" );
+
+                        /* Create the neural network with the specified options. */
+                        let options = {
+                            inputs: 34,
+                            outputs: 4,
+                            task: 'classification',
+                            debug: true
+                        };
+                        brain = ml5.neuralNetwork( options );
+
+                        /* Load the model */
+                        const modelInfo = {
+                            model: 'model/model.json',
+                            metadata: 'model/model_meta.json',
+                            weights: 'model/model.weights.bin'
+                        };
+                        brain.load( modelInfo, showPopup);
+
+                    }
+
+                    /**
+                     * Setup the webcam and posenet.
+                     */
+                    function webCamSetup(){
+                        video = createCapture( VIDEO );
+                        video.hide();
+                        poseNet = ml5.poseNet( video, modelLoaded );
+                    }
+                    
+                    function showPopup() {
+                        settingsWin = new BrowserWindow({
+                            width: 350,
+                            height: 180,
+                            frame: false,
+                            transparent: true,
+                            fullScreenable: false,
+                            maximizable: false,
+                            resizable: false,
+                            fullscreen: false,
+                            show: true,
+                            webPreferences: {
+                                nodeIntegration: true
+                            }
+                        });
+                        settingsWin.loadFile("popup.html");
+                        $("html").css("pointer-events", "none");
+                        settingsWin.setAlwaysOnTop(true);
+                        settingsWin.on("closed", () => {
+                            settingsWin = null;
+                            $("html").css("pointer-events", "all");
+                            webCamSetup();
+                        });
+
+
+                    }
+
+                    /**
+                     * Called constantly and runs the pose through the neural network and classifies it then calls
+                     * got result else it calls itself again after 100ms.
+                     */
+                    function classifyPose() {
+                        if ( pose ) {
+                            let inputs = [];
+                            for ( let i = 0; i < pose.keypoints.length; i++ ) {
+                                let x = pose.keypoints[ i ].position.x;
+                                let y = pose.keypoints[ i ].position.y;
+                                inputs.push( x );
+                                inputs.push( y );
+                            }
+                            brain.classify( inputs, gotResult );
+                        } else {
+                            setTimeout( classifyPose, 100 );
+                        }
+                    }
+
+                    /**
+                     * Called once the brain classifies a pose.
+                     * @param {Error} error The error if present
+                     * @param {Object} results The results from classifyPose
+                     */
+                    function gotResult( error, results ) {
+
+                        $( ".greenBG" ).removeClass( "greenBG" );
+
+                        if ( results[ 0 ].confidence > 0.75 ) {
+                            setItem( lastPoses, results[ 0 ].label, 5 );
+
+                            if ( lastPoses.every( ( i ) => { return i === lastPoses[ 0 ]; })) {
+
+                                let selector = "#" + map[ results[ 0 ].label ].name;
+                                $(selector).addClass( "greenBG" );
+                                if ( results[ 0 ].label !== "base"){
+                                    map[ results[ 0 ].label ]();
+                                }
+                                setTimeout( classifyPose, 1000 );
+                            } else {
+                                classifyPose();
+                            }
+                        } else {
+                            classifyPose();
+                        }
+                    }
+
+                    /**
+                     * Sets the pose and skeleton variable from the list of poses retrieved from poseNet.
+                     * @param {Object} poses
+                     */
+                    function gotPoses( poses ) {
+                        if ( poses.length > 0 ) {
+                            pose = poses[ 0 ].pose;
+                            skeleton = poses[ 0 ].skeleton;
+                        }
+                    }
+
+                    /**
+                     * Called when pose net is loaded then it calls gotPoses when a pose is detected.
+                     */
+                    function modelLoaded() {
+                        console.log( 'poseNet ready' );
+                        poseNet.on( 'pose', gotPoses );
+                        ready = true;
+                        classifyPose();
+                    }
+
+                    /**
+                     * Called in a loop, draws the webcam video and pose to the canvas if the camera is activated
+                     * else it draws a gray screen and a camera icon.
+                     */
+                    function draw() {
+                        if (ready){
+                            push();
+                            translate( video.width, 0 );
+                            scale( -1, 1 );
+                            image( video, 0, 0, video.width, video.height );
+                            if ( pose ) {
+                                for ( let i = 0; i < skeleton.length; i++ ) {
+                                    let a = skeleton[ i ][ 0 ];
+                                    let b = skeleton[ i ][ 1 ];
+                                    strokeWeight( 2 );
+                                    stroke( 0 );
+                                    line( a.position.x, a.position.y, b.position.x, b.position.y );
+                                }
+                                for ( let i = 5; i < pose.keypoints.length; i++ ) {
+                                    let x = pose.keypoints[ i ].position.x;
+                                    let y = pose.keypoints[ i ].position.y;
+                                    fill( 0 );
+                                    stroke( 255 );
+                                    ellipse( x, y, 16, 16 );
+                                }
+                            }
+                            pop();
+                            fill( 255, 0, 255 );
+                            noStroke();
+                            textSize( 32 );
+                            textAlign( CENTER, CENTER );
+                            text( poseLabel, width / 2, height - 20 );
+                        }else{
+                            // Draw a camera icon
+                            background("#e6efe9");
+                            push();
+                            translate(320, 180);
+                            fill(0);
+                            rect(-50, -25, 75, 50, 5);
+                            beginShape();
+                            vertex(30, -5);
+                            vertex(55, -25);
+                            vertex(55, 30);
+                            vertex(30, 10);
+                            endShape(CLOSE);
+                            pop();
+                        }
+                    }
+                </script>
+        </div>
+    </div>
+</body>
+</html>

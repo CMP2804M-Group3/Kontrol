@@ -1,0 +1,40 @@
+<div id = "inserted">
+    <div class="content centerBoth">
+        <img id = "loadingMan1" src="images/gesture.svg" draggable="false">
+        <img id = "loadingMan2" src="images/gesture.svg" draggable="false">
+    </div>
+    <div class="bottomLeft">
+        <h2 class="loading">Looking for Kodi</h2>
+    </div>
+    <script>
+        console.log("Searching for Kodi...");
+        // The code for this isn't ready yet
+
+        setTimeout( () => {
+            kodi.scanForKodis((err, data) => {
+                if (data.length !== 0){
+                    console.log(data);
+                    loadContent("pages/foundKodis.html", () => {
+                        var parent = document.getElementById('kodiList');
+                        for (let i = 0; i < data.length; i++) {
+                            parent.insertAdjacentHTML("beforeend",
+                                `<li tabindex="0"><img class = "wifi" src="images/wifi-full.svg" draggable="false"><h2>${data[i]}</h2></li>`
+                            );
+                        }
+                        $( "#kodiList li" ).on( "click", function() {
+                            $( "#kodiList li" ).removeClass( "selected" );
+                            $( this ).toggleClass( "selected" );
+                        });
+                    });
+                }else{
+                    loadContent("pages/manual.html");
+                }
+
+            }, 8080, 500);
+
+        }, 100);
+
+
+    </script>
+</div>
+
