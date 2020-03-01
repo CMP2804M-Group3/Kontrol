@@ -16,7 +16,10 @@
                     console.log(data);
                     loadContent("pages/foundKodis.html", () => {
                         var parent = document.getElementById('kodiList');
-                        for (let i = 0; i < data.length; i++) {
+                        parent.insertAdjacentHTML("beforeend",
+                            `<li tabindex="0" class="selected"><img class = "wifi" src="images/wifi-full.svg" draggable="false"><h2>${data[0]}</h2></li>`
+                        );
+                        for (let i = 1; i < data.length; i++) {
                             parent.insertAdjacentHTML("beforeend",
                                 `<li tabindex="0"><img class = "wifi" src="images/wifi-full.svg" draggable="false"><h2>${data[i]}</h2></li>`
                             );

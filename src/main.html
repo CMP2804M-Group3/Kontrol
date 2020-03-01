@@ -33,7 +33,10 @@
                     <ul class = "panelList">
                         <li tabindex="0" id = "gestures" class="selected"><img class = "wifi" src="images/wave.svg" draggable="false"><h2>Gestures</h2></li>
                         <li tabindex="0" id = "connection "><img class = "wifi" src="images/wifi.svg" draggable="false"><h2>Connection</h2></li>
-                        <li tabindex="0" id = "settings"><img class = "wifi" src="images/settings.svg" draggable="false"><h2>Settings</h2></li>
+                        <li id="settings" onclick="loadContent('pages/settings.html')" tabindex="0"><img class="wifi"
+                                                                                                         draggable="false"
+                                                                                                         src="images/settings.svg">
+                            <h2>Settings</h2></li>
                         <li tabindex="0" id = "help"><img class = "wifi" src="images/help.svg" draggable="false"><h2>Help</h2></li>
                     </ul>
                 </div>
@@ -82,16 +85,13 @@
                         "base": passFunc
                     };
 
-                    $( ".leftPanel li" ).on( "click", function() {
-                        $( ".leftPanel .selected" ).toggleClass( "selected" );
-                        $( this ).toggleClass( "selected" );
-                    } );
                     $( ".rightPanel li" ).on( "click", function() {
                         $( ".rightPanel .selected" ).toggleClass( "selected" );
                         $( this ).toggleClass( "selected" );
                     } );
-                    function passFunc(){};
 
+                    function passFunc() {
+                    }
                     /**
                      * Setup is run once when the file is loaded, sets up the window the neural network and the
                      * canvas.
@@ -155,7 +155,7 @@
                                 nodeIntegration: true
                             }
                         });
-                        settingsWin.loadFile("popup.html");
+                        settingsWin.loadFile("pages/popup.html");
                         $("html").css("pointer-events", "none");
                         settingsWin.setAlwaysOnTop(true);
                         settingsWin.on("closed", () => {

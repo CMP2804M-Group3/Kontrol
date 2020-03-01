@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="af81014b-5f8b-4f63-9f87-3133ac64a070" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/returning.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/settings.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/manual.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/manual.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/popup.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/popup.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/foundKodis.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/foundKodis.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/loading.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/loading.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/returning.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/returning.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/popup.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/popup.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/script.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/style.css" afterDir="false" />
     </list>
@@ -33,7 +32,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/pages" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -43,7 +42,11 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/pages" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/pages" />
     </key>
   </component>
@@ -81,7 +84,8 @@
       <workItem from="1581512012425" duration="167000" />
       <workItem from="1581513176661" duration="245000" />
       <workItem from="1582647002113" duration="7560000" />
-      <workItem from="1582979325455" duration="15247000" />
+      <workItem from="1582979325455" duration="18253000" />
+      <workItem from="1583082345065" duration="699000" />
     </task>
     <servers />
   </component>
