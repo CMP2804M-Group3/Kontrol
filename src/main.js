@@ -1,4 +1,5 @@
 const { app, BrowserWindow } = require("electron");
+var path = require('path')
 
 let win;
 
@@ -7,6 +8,7 @@ function CreateWindow(){
 	win = new BrowserWindow({
 		width: 400,
 		height: 300,
+		icon: path.join(__dirname, 'icons/win/icon.ico'),
 		frame: false,
 		transparent: true,
 		fullScreenable: false,

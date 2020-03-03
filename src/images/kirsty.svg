@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="19.036" height="24" viewBox="0 0 19.036 24">
+  <g id="Group_29" data-name="Group 29" transform="translate(-440 -204)">
+    <g id="Group_27" data-name="Group 27" transform="translate(435.921 202)">
+      <g id="Group_19" data-name="Group 19" transform="translate(4.079 2)">
+        <path id="Union_2" data-name="Union 2" d="M10.705,22.8v-6h-2.4v6a1.2,1.2,0,0,1-2.4,0V8.052A8.445,8.445,0,0,1,.013,1.368,1.2,1.2,0,0,1,2.389,1.02,6.028,6.028,0,0,0,8.294,6h3.048a3.723,3.723,0,0,1,2.832,1.332l4.512,4.524a1.2,1.2,0,0,1-1.692,1.692L13.105,9.661V22.8a1.2,1.2,0,0,1-2.4,0ZM7.106,2.4a2.4,2.4,0,1,1,2.4,2.4A2.4,2.4,0,0,1,7.106,2.4Z" transform="translate(0 0)" fill="#fff"/>
+      </g>
+    </g>
+    <g id="Group_28" data-name="Group 28" transform="translate(440 204)" opacity="0.5">
+      <g id="Group_19-2" data-name="Group 19" transform="translate(0 0)">
+        <path id="Union_2-2" data-name="Union 2" d="M10.705,1.2v6h-2.4v-6a1.2,1.2,0,0,0-2.4,0V15.948A8.445,8.445,0,0,0,.013,22.632a1.2,1.2,0,0,0,2.376.349A6.028,6.028,0,0,1,8.294,18h3.048a3.723,3.723,0,0,0,2.832-1.332l4.512-4.524a1.2,1.2,0,0,0-1.692-1.692L13.1,14.339V1.2a1.2,1.2,0,0,0-2.4,0Zm-3.6,20.4a2.4,2.4,0,1,0,2.4-2.4A2.4,2.4,0,0,0,7.106,21.6Z" transform="translate(19.036 24) rotate(180)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

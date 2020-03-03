@@ -14,7 +14,11 @@
     <div class="container">
 		<div class="parent" id = "parent">
 			<div class="topBar">  </div>
-			<div class="title"> <h1>Kontrol</h1> </div>
+			<div class="title">
+                <div style="display: flex;">
+                    <img class = "wifi" id = "kirsty" src="images/kirsty.svg" draggable="false"><h2 style="padding-top: 10px;">Kontrol</h2>
+                </div>                
+            </div>
 			<div class="windowButtons">
 				<div class = "buttons">
 					<button id = "minimise">
@@ -32,12 +36,12 @@
                 <div class = "leftPanel">
                     <ul class = "panelList">
                         <li tabindex="0" id = "gestures" class="selected"><img class = "wifi" src="images/wave.svg" draggable="false"><h2>Gestures</h2></li>
-                        <li tabindex="0" id = "connection "><img class = "wifi" src="images/wifi.svg" draggable="false"><h2>Connection</h2></li>
+                        <li tabindex="0" id = "connection " onclick="loadContent('pages/connection.html')"><img class = "wifi" src="images/wifi.svg" draggable="false"><h2>Connection</h2></li>
                         <li id="settings" onclick="loadContent('pages/settings.html')" tabindex="0"><img class="wifi"
                                                                                                          draggable="false"
                                                                                                          src="images/settings.svg">
                             <h2>Settings</h2></li>
-                        <li tabindex="0" id = "help"><img class = "wifi" src="images/help.svg" draggable="false"><h2>Help</h2></li>
+                        <li tabindex="0" id = "help" onclick="loadContent('pages/help.html')" ><img class = "wifi" src="images/help.svg" draggable="false"><h2>Help</h2></li>
                     </ul>
                 </div>
 
@@ -63,6 +67,7 @@
                 </div>
             </div>
                 <script>
+                    running = true;
                     const dialog = require('electron').remote.dialog;
                     const ml5 = require( 'ml5' );
                     let video, poseNet, pose, skeleton, canvas, brain;
@@ -172,7 +177,7 @@
                      * got result else it calls itself again after 100ms.
                      */
                     function classifyPose() {
-                        if ( pose ) {
+                        if ( pose && running) {
                             let inputs = [];
                             for ( let i = 0; i < pose.keypoints.length; i++ ) {
                                 let x = pose.keypoints[ i ].position.x;

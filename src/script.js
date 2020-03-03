@@ -9,6 +9,9 @@ let kodiEnabled = false;
 
 let configPath = "src/config.json";
 
+let running = true;
+let kodis = [];
+let ip = "";
 
 class JSONReader{
     constructor(src){
@@ -35,10 +38,18 @@ class JSONReader{
     overwriteSetting(settingName, value){
         this.JSONData.general[settingName] = value;        
     }
+    addKodi(number, ip){
+        this.JSONData.kodis[number] = ip;        
+    }
     readSetting(settingName){
         return this.JSONData.general[settingName];
     }
-    
+    readKodi(number){
+        return this.JSONData.kodis[number];       
+    }
+    removeKodis(){
+        this.JSONData.kodis = [];
+    }
     overwriteAction(gestureName, status, newAction){
         let newBinding ={"gesture": gestureName,"status": status, "action": newAction};
 
@@ -99,7 +110,7 @@ window.onload = ()=> {
 };
 
 function gotIPandPort() {
-    let ip = settings.readSetting("ip");
+    ip = settings.readSetting("ip");
     let port = settings.readSetting("port");
     if (ip !== "" && port !== ""){
         return [ip, port]
@@ -117,6 +128,7 @@ function loadContent(url, callback) {
     console.log(file);
     let parent = document.getElementById('parent');
     let old = document.getElementById('inserted');
+    running = false;
 
     fs.readFile(file, "utf8", (err, data) => {
         old.parentNode.removeChild(old);

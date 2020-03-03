@@ -1,0 +1,55 @@
+<div id="inserted">
+    <div class="leftPanel">
+        <ul class="panelList">
+            <li id="gestures" onclick="win.loadFile('main.html')" tabindex="0"><img class="wifi" draggable="false"
+                                                                                    src="images/wave.svg">
+                <h2>Gestures</h2></li>
+            <li id="connection " class="selected"  tabindex="0"><img class="wifi" draggable="false" src="images/wifi.svg">
+                <h2>Connection</h2></li>
+            <li onclick="loadContent('pages/settings.html')" id="settings" tabindex="0"><img class="wifi" draggable="false"
+                                                                 src="images/settings.svg">
+                <h2>Settings</h2></li>
+            <li tabindex="0" id = "help" onclick="loadContent('pages/help.html')" ><img class = "wifi" src="images/help.svg" draggable="false"><h2>Help</h2></li>
+
+        </ul>
+    </div>
+
+    <div class="centrePanel" id="centre">
+        <h1 class="bigTitle" id="title">Connection</h1>
+        <!-- <p></p> -->
+        <ul id = "kodiConnectList">
+
+        </ul>
+    </div>
+    <div class="rightPanel" style="background-color: rgba(255,255,255,0.3);"></div>
+
+
+    <script>
+        $(".leftPanel li").on("click", function () {
+            $(".leftPanel .selected").toggleClass("selected");
+            $(this).toggleClass("selected");
+        });
+        $("#kodiConnectList li").on("click", function () {
+            $("#kodiConnectList .selectedConnection").toggleClass("selectedConnection");
+            $(this).toggleClass("selectedConnection");
+        });
+
+        var parent = document.getElementById('kodiConnectList');
+
+        parent.insertAdjacentHTML("beforeend",
+                                `<li tabindex="0"  class="selectedConnection">
+                <div style="display: flex; align-items: center;"><img class = "wifi" src="images/wifi.svg" draggable="false"><h2>${gotIPandPort()[0]}</h2></div>
+                <div class = "connectionControls">
+                    <label class="tickbox"><p style="margin-left: 0px;">Connect automatically</p>
+                        <input type="checkbox" checked="checked">
+                        <span class="checkmark"></span>
+                    </label>                    
+                    <button class="whiteButton">Disconnect</button>
+                </div>
+            </li>`);
+
+        
+
+    </script>
+</div>
+
