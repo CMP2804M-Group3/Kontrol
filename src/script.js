@@ -87,6 +87,7 @@ function startScan(){
 }
 function webcamAllow(){
     settings.overwriteSetting("webcamEnabled", "true");
+    webcamSetup();
     settings.save(() => {
         let win = remote.getCurrentWindow();
         win.close();
@@ -94,6 +95,21 @@ function webcamAllow(){
 
 
 }
+
+
+function toggleNightMode(){
+	if (document.documentElement.getAttribute("data-theme") === 'light'){
+        document.documentElement.setAttribute('data-theme', 'dark');
+        settings.overwriteSetting("theme", "dark");
+        settings.save();
+	}else{
+        document.documentElement.setAttribute('data-theme', 'light');
+        settings.overwriteSetting("theme", "light");
+        settings.save();
+	}
+}
+
+
 
 window.onload = ()=> {
 

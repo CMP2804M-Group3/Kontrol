@@ -31,6 +31,10 @@
 		</div>
 	</div>
 	<script>
+
+		let theme = settings.readSetting("theme");
+		document.documentElement.setAttribute('data-theme', theme);
+
 		let networkDetails = gotIPandPort();
 		if (networkDetails){
 			loadContent("pages/returning.html", () =>{
