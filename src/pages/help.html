@@ -1,7 +1,7 @@
 <div id="inserted">
     <div class="leftPanel">
         <ul class="panelList">
-            <li id="gestures" onclick="win.loadFile('main.html')" tabindex="0"><img class="wifi" draggable="false"
+            <li id="gestures" onclick="loadMain()" tabindex="0"><img class="wifi" draggable="false"
                                                                                     src="images/wave.svg">
                 <h2>Gestures</h2></li>
             <li id="connection " tabindex="0" onclick="loadContent('pages/connection.html')" ><img class="wifi" draggable="false" src="images/wifi.svg">
@@ -16,20 +16,21 @@
     </div>
 
     <div class="centrePanel" id="centre">
-        <h1 class="bigTitle" id="title">Help</h1>
-        <h2>Why is Bailey such a cock goblin?</h2>
-        <p>He got his sweet sweet cock out in the chat didn't he, that naughty boy.<br>
-            1. got his toes out,<br>
-            2. then his knees,<br>
-            3. got too excited,<br>
-            4. snapped a piccy of his diccy.</p>
+        <h1 class="bigTitle" id="title">Help / Q&A</h1>
+        <h2>Why is the video really slow / laggy?</h2>
+        <p>Your device might be struggling to run Kontrol.<br>
+           Try going into the settings menu and turning the settings down by dragging the slider to the left,
+           this will result in lower accuracy and may lead to false positives but it will run better on lower-end systems. </p>
 
-        <h2>What does it look like when Joe tries to type English?</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ultricies, enim sed euismod malesuada, 
-            augue neque mattis mauris, quis feugiat nulla velit ut turpis. Vestibulum sed arcu et justo tristique 
-            sollicitudin consequat vel lectus. Quisque rutrum eget turpis vel sodales. Aenean eu eros ante. In hac 
-            habitasse platea dictumst. Sed eget lectus non dui rhoncus commodo. Aliquam in lorem non magna 
-            blandit finibus vel vitae nisi. Suspendisse ut purus ligula.</p>
+        <h2>Why do you need my Webcam?</h2>
+        <p>Kontrol works by recognising your pose and allows you to control a Kodi instance with your body. 
+            Rest assured that all your data is secure, it never leaves your device. We have no access to your webcam.
+        </p>
+
+        <h2>I have no internet access can I still use Kontrol?</h2>
+        <p>Yes! If Kodi is running on the same device as Kontrol you should be able to scan and connect to Kodi or you can use 127.0.0.1 as the IP 
+            address and the port you set in Kodi (8080 by default). If Kodi and Kontrol are running on different devices it will still work as long as they are both connected to your network, even if the internet is down.
+        </p>
     </div>
     <div class="rightPanel" style="background-color: rgba(255,255,255,0.3);"></div>
 

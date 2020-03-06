@@ -49,8 +49,8 @@
 
                 <div class="centrePanel" id = "centre">
                     <h1 class="bigTitle" id = "title">Gestures</h1>
-                    <h2>We need your permission to use the webcam!</h2>
-                    <p>click on the camera icon above to open the permission popup.</p>
+                    <h2>Perform the gesutre outlined.</h2>
+                    <p>Click an item on the left to see the gesture needed to activate it. Hold that pose for a second to trigger it, you will see the item glow green if you we're successful. </p>
 <!--                    <h2>Copy the poses as they appear.</h2>-->
 <!--                    <p>You can practice each gesture as many times as you like, just choose another from the list on the right when you're ready to move on.</p>-->
                     
@@ -71,7 +71,8 @@
             </div>
                 <script>
                     let theme = settings.readSetting("theme");
-		            document.documentElement.setAttribute('data-theme', theme);
+                    
+		            document.documentElement.setAttribute('data-theme', theme == "Light Blue" ? "light" : "dark");
                     running = true;
                     const dialog = require('electron').remote.dialog;
                     const ml5 = require( 'ml5' );
@@ -82,6 +83,8 @@
                     let state = 'waiting';
                     let lastPoses = [ 1, 2, 3 ];
                     let settingsWin;
+                    let showSkeleton = settings.readSetting("showSkeleton");
+                    let webcamAllowed = settings.readSetting("webcamEnabled");
                     let images = {
                         "rewind": "",
                         "fastForward": "",
@@ -146,7 +149,12 @@
                             metadata: 'model/model_meta.json',
                             weights: 'model/model.weights.bin'
                         };
-                        brain.load( modelInfo, showPopup);
+                        if( webcamAllowed ){
+                            brain.load( modelInfo, webCamSetup);
+                        }else{
+                            brain.load( modelInfo, showPopup);
+                        }
+                        
 
                     }
 
@@ -156,7 +164,12 @@
                     function webCamSetup(){
                         video = createCapture( VIDEO );
                         video.hide();
-                        poseNet = ml5.poseNet( video, modelLoaded );
+                        poseNet = ml5.poseNet(video, {
+                            multiplier: 0.50,// parseFloat(settings.readPerformanceSetting("multiplier")),
+                            outputStride: 16,//parseInt(settings.readPerformanceSetting("stride")),
+                            architecture: settings.readPerformanceSetting("architecture"),
+                            quantBytes: 2//parseInt(settings.readPerformanceSetting("quant"))
+                        }, modelLoaded);
                     }
                     
                     function showPopup() {
@@ -180,6 +193,7 @@
                         settingsWin.on("closed", () => {
                             settingsWin = null;
                             $("html").css("pointer-events", "all");
+                            webCamSetup();
                         });
                     }
 
@@ -272,22 +286,25 @@
                             translate( video.width, 0 );
                             scale( -1, 1 );
                             image( video, 0, 0, video.width, video.height );
-                            if ( pose ) {
-                                for ( let i = 0; i < skeleton.length; i++ ) {
-                                    let a = skeleton[ i ][ 0 ];
-                                    let b = skeleton[ i ][ 1 ];
-                                    strokeWeight( 2 );
-                                    stroke( 0 );
-                                    line( a.position.x, a.position.y, b.position.x, b.position.y );
-                                }
-                                for ( let i = 5; i < pose.keypoints.length; i++ ) {
-                                    let x = pose.keypoints[ i ].position.x;
-                                    let y = pose.keypoints[ i ].position.y;
-                                    fill( 0 );
-                                    stroke( 255 );
-                                    ellipse( x, y, 16, 16 );
+                            if ( showSkeleton ){
+                                if ( pose ) {
+                                    for ( let i = 0; i < skeleton.length; i++ ) {
+                                        let a = skeleton[ i ][ 0 ];
+                                        let b = skeleton[ i ][ 1 ];
+                                        strokeWeight( 2 );
+                                        stroke( 0 );
+                                        line( a.position.x, a.position.y, b.position.x, b.position.y );
+                                    }
+                                    for ( let i = 5; i < pose.keypoints.length; i++ ) {
+                                        let x = pose.keypoints[ i ].position.x;
+                                        let y = pose.keypoints[ i ].position.y;
+                                        fill( 0 );
+                                        stroke( 255 );
+                                        ellipse( x, y, 16, 16 );
+                                    }
                                 }
                             }
+                            
                             pop();
                             push();
                             tint(255, 127.5);

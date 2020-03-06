@@ -1,7 +1,7 @@
 <div id="inserted">
     <div class="leftPanel settingsLeft">
         <ul class="panelList">
-            <li id="gestures" onclick="win.loadFile('main.html')" tabindex="0"><img class="wifi" draggable="false"
+            <li id="gestures" onclick="loadMain()" tabindex="0"><img class="wifi" draggable="false"
                                                                                     src="images/wave.svg">
                 <h2>Gestures</h2></li>
             <li id="connection " tabindex="0" onclick="loadContent('pages/connection.html')"><img class="wifi" draggable="false" src="images/wifi.svg">
@@ -17,43 +17,94 @@
     <div class="centrePanel settingsCentre" id="centre">
         <h1 class="bigTitle" id="title">Settings</h1>
         <ul id = "kodiList">
-            <h2>Performance</h2>
+            <h2>General</h2>
             <li tabindex="0" class="settingsCheckbox">
-                <h3>Checkbox</h3>
-                <label class="tickbox">
-                    <input type="checkbox" checked="checked">
+                <h3>Allow Webcam access</h3>
+                <label class="tickbox", id = "webcamTickbox">
+                    <input type="checkbox">
                     <span class="checkmark"></span>
                 </label>     
             </li>
-            <li tabindex="0" class="settingsSlider">
-                <h3>Slider</h3>
-                <div class="slidecontainer">
-                    <input type="range" min="0" max="100" value="50", step = "25" class="slider" id="myRange">
-                  </div>
+            <li tabindex="0" class="settingsCheckbox">
+                <h3>Show skeleton</h3>
+                <label class="tickbox", id = "skeletonTickbox">
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>     
             </li>
+
             <li tabindex="0" class="settingsDropdown">
-                <h3>Dropdown</h3>
-                <div class="custom-select" style="width:200px;">
+                <h3>Theme</h3>
+                <div class="custom-select" id = "themeSelect">
                     <select>
-                      <option value="0">Select car:</option>
-                      <option value="1">A</option>
-                      <option value="2">B</option>
-                      <option value="3">C</option>
+                      <option value="0">Select a Theme:</option>
+                      <option value="1">Light Blue</option>
+                      <option value="2">Dark Blue</option>
                     </select>
                   </div>
             </li>
-        </ul>
-        <!-- <ul id = "kodiConnectList">
-            <li tabindex="0">
-                <div style="display: flex; align-items: center;"><img class = "wifi" src="images/wifi.svg" draggable="false"><h2>${gotIPandPort()[0]}</h2></div>
-                <label class="tickbox"><p style="margin-left: 0px;">Connect automatically</p>
-                    <input type="checkbox" checked="checked">
-                    <span class="checkmark"></span>
-                </label>                    
-                <button class="whiteButton">Disconnect</button>
-            </li>
-        </ul> -->
 
+            <h2 style="margin-top: 50px">Performance</h2>
+
+            <li tabindex="0" class="settingsSlider">
+                <h3>Perfomance Presets</h3>
+                <div class="slidecontainer">
+                    <input type="range" min="0" max="100" value="50", step = "25" class="slider" id="myRange">
+                </div>
+            </li>
+
+            <li tabindex="0" class="settingsDropdown">
+                <h3>Architecture</h3>
+                <div class="custom-select" id = "architectureSelect">
+                    <select>
+                      <option value="0">Architecture:</option>
+                      <option value="1">MobileNetV1</option>
+                      <option value="2">ResNet50</option>
+                    </select>
+                  </div>
+            </li>
+            <li tabindex="0" class="settingsDropdown">
+                <h3>Output stride</h3>
+                <div class="custom-select" id = "outputSelect">
+                    <select>
+                      <option value="0">Output stride:</option>
+                      <option value="1">8</option>
+                      <option value="2">16</option>
+                    </select>
+                  </div>
+            </li>
+            <li tabindex="0" class="settingsDropdown">
+                <h3>Multiplier</h3>
+                <div class="custom-select" id = "multiplierSelect">
+                    <select>
+                      <option value="0">Multiplier:</option>
+                      <option value="1">1.01</option>
+                      <option value="2">1.0</option>
+                      <option value="3">0.75</option>
+                      <option value="4">0.5</option>
+                    </select>
+                  </div>
+            </li>
+            <li tabindex="0" class="settingsDropdown">
+                <h3>Quant bytes</h3>
+                <div class="custom-select" id = "quantSelect">
+                    <select>
+                      <option value="0">Quant Bytes:</option>
+                      <option value="1">2</option>
+                      <option value="2">4</option>
+                    </select>
+                  </div>
+            </li>
+            
+
+            
+
+        </ul>
+
+        <div id = "saveButtons">
+            <button class = "transButton">Cancel</button>
+            <button class = "whiteButton" onclick="saveSettings()">Save</button>
+        </div>
     </div>
     <div class="rightPanel" style="background-color: rgba(255,255,255,0.3);"></div>
 
@@ -63,6 +114,32 @@
             $(".leftPanel .selected").toggleClass("selected");
             $(this).toggleClass("selected");
         });
+
+        function updateDropdown() {
+                /* When an item is clicked, update the original select box,
+                and the selected item: */
+                console.log(this);
+
+                var y, i, k, s, h;
+                s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+                h = this.parentNode.previousSibling;
+                for (i = 0; i < s.length; i++) {
+                if (s.options[i].innerHTML == this.innerHTML) {
+                    s.selectedIndex = i;
+                    h.innerHTML = this.innerHTML;
+                    y = this.parentNode.getElementsByClassName("same-as-selected");
+                    for (k = 0; k < y.length; k++) {
+                    y[k].removeAttribute("class");
+                    }
+                    this.setAttribute("class", "same-as-selected");
+                    break;
+                }
+                }
+                console.log(h);
+                h.click();
+        }
+        
+            
         var x, i, j, selElmnt, a, b, c;
         /* Look for any elements with the class "custom-select": */
         x = document.getElementsByClassName("custom-select");
@@ -81,26 +158,7 @@
             create a new DIV that will act as an option item: */
             c = document.createElement("DIV");
             c.innerHTML = selElmnt.options[j].innerHTML;
-            c.addEventListener("click", function(e) {
-                /* When an item is clicked, update the original select box,
-                and the selected item: */
-                var y, i, k, s, h;
-                s = this.parentNode.parentNode.getElementsByTagName("select")[0];
-                h = this.parentNode.previousSibling;
-                for (i = 0; i < s.length; i++) {
-                if (s.options[i].innerHTML == this.innerHTML) {
-                    s.selectedIndex = i;
-                    h.innerHTML = this.innerHTML;
-                    y = this.parentNode.getElementsByClassName("same-as-selected");
-                    for (k = 0; k < y.length; k++) {
-                    y[k].removeAttribute("class");
-                    }
-                    this.setAttribute("class", "same-as-selected");
-                    break;
-                }
-                }
-                h.click();
-            });
+            c.addEventListener("click", updateDropdown);
             b.appendChild(c);
         }
         x[i].appendChild(b);
@@ -133,10 +191,59 @@
             }
         }
         }
+        if(settings.readSetting("webcamEnabled")){
+            $("#webcamTickbox input").click()
+        }
+        if(settings.readSetting("showSkeleton")){
+            $("#skeletonTickbox input").click()
+        }
+        setupDropdown("#themeSelect", settings.readSetting("theme"))
+
+        setupDropdown("#architectureSelect", settings.readPerformanceSetting("architecture"));
+        setupDropdown("#outputSelect", settings.readPerformanceSetting("stride"));
+        setupDropdown("#multiplierSelect", settings.readPerformanceSetting("multiplier"));
+        setupDropdown("#quantSelect", settings.readPerformanceSetting("quant"));
+
 
         /* If the user clicks anywhere outside the select box,
         then close all select boxes: */
         document.addEventListener("click", closeAllSelect); 
+
+        $("#myRange").on("change", () => {
+            let value = int($("#myRange")[0].value);
+            console.log(value)
+            if(value == 0){
+                setupDropdown("#architectureSelect", "MobileNetV1");
+                setupDropdown("#outputSelect", "16");
+                setupDropdown("#multiplierSelect", "0.5");
+                setupDropdown("#quantSelect", "1");
+            }
+            if(value == 25){
+                setupDropdown("#architectureSelect", "MobileNetV1");
+                setupDropdown("#outputSelect", "16");
+                setupDropdown("#multiplierSelect", "0.75");
+                setupDropdown("#quantSelect", "2");
+            }
+            if(value == 50){
+                setupDropdown("#architectureSelect", "MobileNetV1");
+                setupDropdown("#outputSelect", "8");
+                setupDropdown("#multiplierSelect", "1");
+                setupDropdown("#quantSelect", "2");
+            }
+            if(value == 75){
+                setupDropdown("#architectureSelect", "ResNet50");
+                setupDropdown("#outputSelect", "16");
+                setupDropdown("#multiplierSelect", "1");
+                setupDropdown("#quantSelect", "2");
+            }
+            if(value == 100){
+                setupDropdown("#architectureSelect", "ResNet50");
+                setupDropdown("#outputSelect", "16");
+                setupDropdown("#multiplierSelect", "1.01");
+                setupDropdown("#quantSelect", "4");
+            }
+
+        });
     </script>
 </div>
 

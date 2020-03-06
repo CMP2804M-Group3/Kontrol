@@ -38,11 +38,17 @@ class JSONReader{
     overwriteSetting(settingName, value){
         this.JSONData.general[settingName] = value;        
     }
+    overwritePerformanceSetting(settingName, value){
+        this.JSONData.performance[settingName] = value;        
+    }
     addKodi(number, ip){
         this.JSONData.kodis[number] = ip;        
     }
     readSetting(settingName){
         return this.JSONData.general[settingName];
+    }
+    readPerformanceSetting(settingName){
+        return this.JSONData.performance[settingName];
     }
     readKodi(number){
         return this.JSONData.kodis[number];       
@@ -87,7 +93,6 @@ function startScan(){
 }
 function webcamAllow(){
     settings.overwriteSetting("webcamEnabled", "true");
-    webcamSetup();
     settings.save(() => {
         let win = remote.getCurrentWindow();
         win.close();
@@ -175,7 +180,7 @@ function fastForward() {
 }
 
 function goPrevious() {
-    kodi.rewind();
+    kodi.goBack();
 }
 
 function goNext() {
@@ -225,4 +230,41 @@ function selectFromScan() {
         win.loadFile("main.html");
     });
 
+}
+
+function setupDropdown(dropdown, item) {
+    $(dropdown).children()[1].click();
+    for (let i = 0; i < $($(dropdown).children()[2]).children().length; i++){
+        if ($($(dropdown).children()[2]).children()[i].innerHTML == item){
+            $($(dropdown).children()[2]).children()[i].click();
+        }
+    }
+}
+
+function loadMain(){
+    win.hide();
+    win.loadFile("main.html");
+}
+
+
+function saveSettings(){
+    let webcam = $("#webcamTickbox input").is(":checked");
+    let skeleton = $("#skeletonTickbox input").is(":checked");
+    let theme = $("#themeSelect .select-selected")[0].innerHTML;
+    let architecture = $("#architectureSelect .select-selected")[0].innerHTML;
+    let output = $("#outputSelect .select-selected")[0].innerHTML;
+    let multi = $("#multiplierSelect .select-selected")[0].innerHTML;
+    let quant = $("#quantSelect .select-selected")[0].innerHTML;
+    settings.overwriteSetting("webcamEnabled", webcam);
+    settings.overwriteSetting("showSkeleton", skeleton);
+    settings.overwriteSetting("theme", theme);
+    settings.overwritePerformanceSetting("architecture", architecture);
+    settings.overwritePerformanceSetting("stride", output);
+    settings.overwritePerformanceSetting("multiplier", multi);
+    settings.overwritePerformanceSetting("quant", quant);
+    settings.save(() =>{
+        console.log("Saved!");
+        win.hide();
+        win.loadFile('main.html');
+    });
 }
