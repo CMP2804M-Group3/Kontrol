@@ -11,6 +11,9 @@
     <title>Kontrol</title>
 </head>
 <body class="big">
+    <div id = "loading">
+        <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
     <div class="container">
 		<div class="parent" id = "parent">
 			<div class="topBar">
@@ -43,7 +46,7 @@
                                                                                                          draggable="false"
                                                                                                          src="images/settings.svg">
                             <h2>Settings</h2></li>
-                        <li tabindex="0" id = "help" onclick="loadContent('pages/help.html')" ><img class = "wifi" src="images/help.svg" draggable="false"><h2>Help</h2></li>
+                        <li tabindex="0" id = "help" onclick="loadContent('pages/help.html')"  ><img class = "wifi" src="images/help.svg" draggable="false"><h2>Help</h2></li>
                     </ul>
                 </div>
 
@@ -66,13 +69,13 @@
                         <li id = "volumeUp" tabindex="0"><img class = "wifi" src="images/volume_up-24px.svg" draggable="false"><h2>Volume Up</h2></li>
                         <li id = "mute" tabindex="0"><img class = "wifi" src="images/volume_off-24px.svg" draggable="false"><h2>Mute/Unmute</h2></li>
 
+                        <li id = "connectionStatus" tabindex="0"  onclick="loadContent('pages/connection.html')" ><img class = "wifi" src="images/no-wifi.svg" draggable="false"><h2>Not Connected</h2></li>
+
                     </ul>
                 </div>
             </div>
                 <script>
-                    let theme = settings.readSetting("theme");
                     
-		            document.documentElement.setAttribute('data-theme', theme == "Light Blue" ? "light" : "dark");
                     running = true;
                     const dialog = require('electron').remote.dialog;
                     const ml5 = require( 'ml5' );
@@ -83,8 +86,10 @@
                     let state = 'waiting';
                     let lastPoses = [ 1, 2, 3 ];
                     let settingsWin;
-                    let showSkeleton = settings.readSetting("showSkeleton");
-                    let webcamAllowed = settings.readSetting("webcamEnabled");
+                    let showSkeleton;
+                    let webcamAllowed;
+                    let connection = false;
+
                     let images = {
                         "rewind": "",
                         "fastForward": "",
@@ -123,38 +128,58 @@
                         win.show();
                         win.setSize( 1200, 800 );
                         win.center();
-
+                        
                         /* Read the IP & Port from the settings file and create a
                            kodi controller instance with those details. */
-                        let ip = settings.readSetting( "ip" );
-                        let port = settings.readSetting( "port" );
-                        kodi = new kodiController( ip, port );
+                        settings = new JSONReader( configPath , () => {
+                            let theme = settings.readSetting("theme");                    
+                            document.documentElement.setAttribute('data-theme', theme == "Light Blue" ? "light" : "dark");
+                            showSkeleton = settings.readSetting("showSkeleton");
+                            webcamAllowed = settings.readSetting("webcamEnabled");
+                            let ip = settings.readSetting( "ip" );
+                            let port = settings.readSetting( "port" );
+                            kodi = new kodiController( ip, port );
+                            kodi.pingKodi(`http://${ip}:${port}/jsonrpc`).then((data) => {
+                                connection = data;
+                                setTimeout(()=>{
+                                let status = $("#connectionStatus");
+                                status.css("width", "100%");
+                                if(connection){
+                                    status.children()[0].src = "images/wifi.svg";
+                                    status.children()[1].innerText = "Connected";
+                                }
+                            }, 200);
+                            });
 
-                        /* Create a canvas and insert it under the title. */
-                        canvas = createCanvas( 640, 360 );
-                        canvas.parent( "title" );
+                            
 
-                        /* Create the neural network with the specified options. */
-                        let options = {
-                            inputs: 34,
-                            outputs: 4,
-                            task: 'classification',
-                            debug: true
-                        };
-                        brain = ml5.neuralNetwork( options );
 
-                        /* Load the model */
-                        const modelInfo = {
-                            model: 'model/model.json',
-                            metadata: 'model/model_meta.json',
-                            weights: 'model/model.weights.bin'
-                        };
-                        if( webcamAllowed ){
-                            brain.load( modelInfo, webCamSetup);
-                        }else{
-                            brain.load( modelInfo, showPopup);
-                        }
-                        
+                            /* Create a canvas and insert it under the title. */
+                            canvas = createCanvas( 640, 360 );
+                            canvas.parent( "title" );
+
+
+                            /* Create the neural network with the specified options. */
+                            let options = {
+                                inputs: 34,
+                                outputs: 4,
+                                task: 'classification',
+                                debug: true
+                            };
+                            brain = ml5.neuralNetwork( options);
+
+                            /* Load the model */
+                            const modelInfo = {
+                                model: 'model/model.json',
+                                metadata: 'model/model_meta.json',
+                                weights: 'model/model.weights.bin'
+                            };
+                            if( webcamAllowed ){
+                                brain.load( modelInfo, webCamSetup);
+                            }else{
+                                brain.load( modelInfo, showPopup);
+                            }
+                    });
 
                     }
 
@@ -162,13 +187,14 @@
                      * Setup the webcam and posenet.
                      */
                     function webCamSetup(){
+                        showLoading();
                         video = createCapture( VIDEO );
                         video.hide();
                         poseNet = ml5.poseNet(video, {
-                            multiplier: 0.50,// parseFloat(settings.readPerformanceSetting("multiplier")),
-                            outputStride: 16,//parseInt(settings.readPerformanceSetting("stride")),
+                            multiplier: parseFloat(settings.readPerformanceSetting("multiplier")),
+                            outputStride: parseInt(settings.readPerformanceSetting("stride")),
                             architecture: settings.readPerformanceSetting("architecture"),
-                            quantBytes: 2//parseInt(settings.readPerformanceSetting("quant"))
+                            quantBytes: parseInt(settings.readPerformanceSetting("quant"))
                         }, modelLoaded);
                     }
                     
@@ -177,6 +203,7 @@
                             width: 350,
                             height: 180,
                             frame: false,
+                            icon: `file://${__dirname}/icons/win/icon.ico`,
                             transparent: true,
                             fullScreenable: false,
                             maximizable: false,
@@ -187,7 +214,9 @@
                                 nodeIntegration: true
                             }
                         });
-                        settingsWin.loadFile("pages/popup.html");
+                        
+                        settingsWin.loadURL(`file://${__dirname}/pages/popup.html`);
+
                         $("html").css("pointer-events", "none");
                         settingsWin.setAlwaysOnTop(true);
                         settingsWin.on("closed", () => {
@@ -232,7 +261,7 @@
 
                                 let selector = "#" + map[ results[ 0 ].label ].name;
                                 $(selector).addClass( "greenBG" );
-                                if ( results[ 0 ].label !== "base"){
+                                if ( results[ 0 ].label !== "base" && connection){
                                     map[ results[ 0 ].label ]();
                                 }
                                 setTimeout( classifyPose, 1000 );
@@ -259,6 +288,7 @@
                      * Called when pose net is loaded then it calls gotPoses when a pose is detected.
                      */
                     function modelLoaded() {
+                        hideLoading();
                         console.log( 'poseNet ready' );
                         poseNet.on( 'pose', gotPoses );
                         ready = true;

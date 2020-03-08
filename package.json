@@ -1,16 +1,21 @@
 {
-  "name": "gesture-recognition",
-  "version": "0.0.1",
-  "description": "Main package for project.",
+  "name": "kontrol",
+  "productName": "Kontrol",
+  "version": "1.0.0",
+  "description": "Use your body to control Kodi!",
   "main": "src/main.js",
   "directories": {
     "test": "test"
   },
   "dependencies": {
-    "electron": "^7.1.10",
     "kodi-controller": "^1.0.11",
     "jquery": "^3.4.1",
     "ml5": "0.4.3"
+  },
+  "devDependencies": {
+    "electron": "^7.1.10",
+    "electron-winstaller": "^4.0.0",
+    "electron-wix-msi": "^2.2.0"
   },
   "scripts": {
     "start": "electron src/main.js"

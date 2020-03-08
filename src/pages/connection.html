@@ -16,10 +16,13 @@
 
     <div class="centrePanel" id="centre">
         <h1 class="bigTitle" id="title">Connection</h1>
-        <!-- <p></p> -->
+        <h2 id = "currentConnection">You are not connected to a Kodi!</h2>
         <ul id = "kodiConnectList">
-
+            
         </ul>
+        <div id = "saveButtons">
+            <button class = "whiteButton" onclick="saveConnections()">Save</button>
+        </div>
     </div>
     <div class="rightPanel" style="background-color: rgba(255,255,255,0.3);"></div>
 
@@ -29,25 +32,8 @@
             $(".leftPanel .selected").toggleClass("selected");
             $(this).toggleClass("selected");
         });
-        $("#kodiConnectList li").on("click", function () {
-            $("#kodiConnectList .selectedConnection").toggleClass("selectedConnection");
-            $(this).toggleClass("selectedConnection");
-        });
-
-        var parent = document.getElementById('kodiConnectList');
-
-        parent.insertAdjacentHTML("beforeend",
-                                `<li tabindex="0"  class="selectedConnection">
-                <div style="display: flex; align-items: center;"><img class = "wifi" src="images/wifi.svg" draggable="false"><h2>${gotIPandPort()[0]}</h2></div>
-                <div class = "connectionControls">
-                    <label class="tickbox"><p style="margin-left: 0px;">Connect automatically</p>
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmark"></span>
-                    </label>                    
-                    <button class="whiteButton">Disconnect</button>
-                </div>
-            </li>`);
-
+        
+        connectionSetup();
         
 
     </script>
