@@ -1,4 +1,5 @@
 const { app, BrowserWindow } = require("electron");
+var path = require('path')
 
 let win;
 
@@ -7,6 +8,7 @@ function CreateWindow(){
 	win = new BrowserWindow({
 		width: 400,
 		height: 300,
+		icon: path.join(__dirname, 'icons/win/icon.ico'),
 		frame: false,
 		transparent: true,
 		fullScreenable: false,
@@ -16,7 +18,9 @@ function CreateWindow(){
 		show: false,
 		webPreferences: {
 			nodeIntegration: true,
-			nativeWindowOpen: true
+			nativeWindowOpen: true,
+			// webSecurity: false
+
 		}
 	});
 	win.setMenu(null);
@@ -26,11 +30,10 @@ function CreateWindow(){
 	win.webContents.on('dom-ready', function () {
 		win.show();
 	});
-
-	win.loadFile("index.html");
+	win.loadURL(`file://${__dirname}/index.html`);
 
 	// remove this before complete release
-	win.webContents.openDevTools();
+	// win.webContents.openDevTools();
 
 	win.on("closed", () => {
 		win = null;

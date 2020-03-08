@@ -1,1 +1,1 @@
-{"general":{"ip":"192.168.0.12","port":"8080","theme":"","webcamEnabled":"true"},"gesture_bindings":[{"gesture":"leftWave","status":"player","action":"makeABigBeepNoise"},{"gesture":"leftWave0","status":"menu","action":"left"}]}
+{"general": {"ip": "","port": "","theme": "Light Blue","webcamEnabled": false,"showSkeleton": true},"performance": {"architecture": "MobileNetV1","stride": "16","multiplier": "0.5","quant": "2"},"kodis": []}

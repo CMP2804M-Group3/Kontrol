@@ -31,16 +31,35 @@
 		</div>
 	</div>
 	<script>
-		let networkDetails = gotIPandPort();
-		if (networkDetails){
-			loadContent("pages/returning.html", () =>{
-				$("#IP")[0].value = networkDetails[0];
-				$("#port")[0].value = networkDetails[1];
-			});
-		}else{
-			loadContent("pages/welcome.html")
-		}
+		
+		window.onload = () => {
+			document.getElementById( "closeButton" ).addEventListener( "click",
+			function( e ) {
+				let win = remote.getCurrentWindow();
+				win.close();
+			} );
+			document.getElementById( "minimise" ).addEventListener( "click",
+			function( e ) {
+				let win = remote.getCurrentWindow();
+				win.minimize();
+			} );
+			settings = new JSONReader( configPath , () => {
+				let theme = settings.readSetting("theme");
+				document.documentElement.setAttribute('data-theme', theme);
 
+				let networkDetails = gotIPandPort();
+				if (networkDetails){
+					loadContent("pages/returning.html", () =>{
+						$("#IP")[0].value = networkDetails[0];
+						$("#port")[0].value = networkDetails[1];
+					});
+				}else{
+					loadContent("pages/welcome.html")
+				}
+			});
+
+			
+		}
 
 	</script>
 </body>

@@ -102,3 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+windows_installer/
+
+squirrel/
+
+Kontrol-win32-x64/

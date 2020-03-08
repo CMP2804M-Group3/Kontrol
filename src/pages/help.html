@@ -1,0 +1,44 @@
+<div id="inserted">
+    <div class="leftPanel">
+        <ul class="panelList">
+            <li id="gestures" onclick="loadMain()" tabindex="0"><img class="wifi" draggable="false"
+                                                                                    src="images/wave.svg">
+                <h2>Gestures</h2></li>
+            <li id="connection " tabindex="0" onclick="loadContent('pages/connection.html')" ><img class="wifi" draggable="false" src="images/wifi.svg">
+                <h2>Connection</h2></li>
+                <li id="settings" onclick="loadContent('pages/settings.html')" tabindex="0"><img class="wifi"
+                    draggable="false"
+                    src="images/settings.svg">
+                <h2>Settings</h2></li>
+            <li class = "selected" id="help" tabindex="0"><img class="wifi" draggable="false" src="images/help.svg">
+                <h2>Help</h2></li>
+        </ul>
+    </div>
+
+    <div class="centrePanel" id="centre">
+        <h1 class="bigTitle" id="title">Help / Q&A</h1>
+        <h2>Why is the video really slow / laggy?</h2>
+        <p>Your device might be struggling to run Kontrol.<br>
+           Try going into the settings menu and turning the settings down by dragging the slider to the left,
+           this will result in lower accuracy and may lead to false positives but it will run better on lower-end systems. </p>
+
+        <h2>Why do you need my Webcam?</h2>
+        <p>Kontrol works by recognising your pose and allows you to control a Kodi instance with your body. 
+            Rest assured that all your data is secure, it never leaves your device. We have no access to your webcam.
+        </p>
+
+        <h2>I have no internet access can I still use Kontrol?</h2>
+        <p>Yes! If Kodi is running on the same device as Kontrol you should be able to scan and connect to Kodi or you can use 127.0.0.1 as the IP 
+            address and the port you set in Kodi (8080 by default). If Kodi and Kontrol are running on different devices it will still work as long as they are both connected to your network, even if the internet is down.
+        </p>
+    </div>
+    <div class="rightPanel" style="background-color: rgba(255,255,255,0.3);"></div>
+
+    <script>
+        $(".leftPanel li").on("click", function () {
+            $(".leftPanel .selected").toggleClass("selected");
+            $(this).toggleClass("selected");
+        });
+    </script>
+</div>
+
