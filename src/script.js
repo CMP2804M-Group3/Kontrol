@@ -6,7 +6,7 @@ const fs = require( 'fs' );
 const kodiController = require( 'kodi-controller' );
 let kodi = new kodiController();
 let kodiEnabled = false;
-let configPath = `${require('os').homedir()}\\.Kontrol\\config.json`;
+let configPath = `${require('os').homedir()}/.Kontrol/config.json`;
 let running = true;
 let settings;
 let ip = "";
@@ -94,9 +94,6 @@ class JSONReader {
         }
     }
 }
-
-
-
 
 function quitApp() {
     let wins = BrowserWindow.getAllWindows();
@@ -358,7 +355,7 @@ function showWarningPopup( title, message, callback ) {
         height: 180,
         frame: false,
         transparent: true,
-        icon: `file://${__dirname}/icons/win/icon.ico`,
+        icon: `file://${__dirname}/icons/png/48x48.png`,
         fullScreenable: false,
         maximizable: false,
         resizable: false,
@@ -368,7 +365,7 @@ function showWarningPopup( title, message, callback ) {
 			nodeIntegration: true
         }
     } );
-    settingsWinwin.loadURL(`file://${__dirname}/pages/info.html`);
+    settingsWin.loadURL(`file://${__dirname}/pages/info.html`);
     $( "html" ).css( "pointer-events", "none" );
     settingsWin.setAlwaysOnTop( true );
     ipcMain.on( 'Am_I_Ready', () => {

@@ -142,13 +142,13 @@
                             kodi.pingKodi(`http://${ip}:${port}/jsonrpc`).then((data) => {
                                 connection = data;
                                 setTimeout(()=>{
-                                let status = $("#connectionStatus");
-                                status.css("width", "100%");
-                                if(connection){
-                                    status.children()[0].src = "images/wifi.svg";
-                                    status.children()[1].innerText = "Connected";
-                                }
-                            }, 200);
+                                    let status = $("#connectionStatus");
+                                    status.css("width", "100%");
+                                    if(data){
+                                        status.children()[0].src = "images/wifi.svg";
+                                        status.children()[1].innerText = "Connected";
+                                    }
+                                }, 500);
                             });
 
                             
@@ -188,14 +188,20 @@
                      */
                     function webCamSetup(){
                         showLoading();
-                        video = createCapture( VIDEO );
-                        video.hide();
-                        poseNet = ml5.poseNet(video, {
-                            multiplier: parseFloat(settings.readPerformanceSetting("multiplier")),
-                            outputStride: parseInt(settings.readPerformanceSetting("stride")),
-                            architecture: settings.readPerformanceSetting("architecture"),
-                            quantBytes: parseInt(settings.readPerformanceSetting("quant"))
-                        }, modelLoaded);
+                        try{
+                            video = createCapture( VIDEO );
+                            video.hide();
+                            console.log(video.src); // Will error if video not found
+                            poseNet = ml5.poseNet(video, {
+                                multiplier: parseFloat(settings.readPerformanceSetting("multiplier")),
+                                outputStride: parseInt(settings.readPerformanceSetting("stride")),
+                                architecture: settings.readPerformanceSetting("architecture"),
+                                quantBytes: parseInt(settings.readPerformanceSetting("quant"))
+                            }, modelLoaded);
+                        } catch (e){
+                            setTimeout(hideLoading, 200);
+                        }
+                        
                     }
                     
                     function showPopup() {
@@ -203,7 +209,7 @@
                             width: 350,
                             height: 180,
                             frame: false,
-                            icon: `file://${__dirname}/icons/win/icon.ico`,
+                            icon: `file://${__dirname}/icons/png/48x48.png`,
                             transparent: true,
                             fullScreenable: false,
                             maximizable: false,
