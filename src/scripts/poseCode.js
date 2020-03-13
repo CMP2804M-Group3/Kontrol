@@ -54,6 +54,17 @@ $(".rightPanel li").on("click", function () {
 function passFunc() {
 }
 
+function loadImages() {
+
+    images["playPause"] = loadImage('images/t.png');
+    images["volumeDown"] = loadImage("images/90_left.png");
+    images["volumeUp"] = loadImage("images/90_right.png");
+    images["goPrevious"] = loadImage("images/out_left.png");
+    images["goNext"] = loadImage("images/out_right.png");
+    images["rewind"] = loadImage("images/up_left.png");
+    images["fastForward"] = loadImage("images/up_right.png");
+}
+
 /**
  * Setup is run once when the file is loaded, sets up the window the neural network and the
  * canvas.
@@ -71,6 +82,18 @@ function setup() {
         document.documentElement.setAttribute('data-theme', theme == "Light Blue" ? "light" : "dark");
         showSkeleton = settings.readSetting("showSkeleton");
         webcamAllowed = settings.readSetting("webcamEnabled");
+
+        map["T_pose"] = controlMap[settings.getActionFromGesture("T Pose", "player").action];
+        map["Left_arm_up"] = controlMap[settings.getActionFromGesture("Left arm up", "player").action];
+        map["Right_arm_up"] = controlMap[settings.getActionFromGesture("Right arm up", "player").action];
+        map["Left_arm_out"] = controlMap[settings.getActionFromGesture("Left arm out", "player").action];
+        map["Right_arm_out"] = controlMap[settings.getActionFromGesture("Right arm out", "player").action];
+        map["Left_arm_90_up"] = controlMap[settings.getActionFromGesture("Left arm 90deg up", "player").action];
+        map["Right_arm_90_up"] = controlMap[settings.getActionFromGesture("Right arm 90deg up", "player").action];
+
+        loadImages();
+
+
         let ip = settings.readSetting("ip");
         let port = settings.readSetting("port");
         kodi = new kodiController(ip, port);
@@ -230,16 +253,7 @@ function modelLoaded() {
     classifyPose();
 }
 
-function preload() {
 
-    images["playPause"] = loadImage('images/t.png');
-    images["volumeDown"] = loadImage("images/90_left.png");
-    images["volumeUp"] = loadImage("images/90_right.png");
-    images["goPrevious"] = loadImage("images/out_left.png");
-    images["goNext"] = loadImage("images/out_right.png");
-    images["rewind"] = loadImage("images/up_left.png");
-    images["fastForward"] = loadImage("images/up_right.png");
-}
 
 /**
  * Called in a loop, draws the webcam video and pose to the canvas if the camera is activated

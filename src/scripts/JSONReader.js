@@ -26,15 +26,29 @@ class JSONReader {
 
     save(callback) {
         var jsonContent = JSON.stringify(this.JSONData);
-        fs.writeFile(this.src, jsonContent, 'utf8', callback);
+        if (callback) {
+            fs.writeFile(this.src, jsonContent, 'utf8', callback);
+        } else {
+            fs.writeFile(this.src, jsonContent, 'utf8');
+
+        }
     }
 
     getActionFromGesture(gestureName, status) {
         for (let i in this.JSONData.gesture_bindings) {
             let binding = this.JSONData.gesture_bindings[i];
-            if (binding.gesture === gestureName && binding.status ===
-                status) {
+            if (binding.gesture === gestureName && binding.status === status) {
                 return binding;
+            }
+        }
+        console.error("Error, no command found for this gesture");
+    }
+
+    getGestureFromAction(actionName, status) {
+        for (let i in this.JSONData.gesture_bindings) {
+            let binding = this.JSONData.gesture_bindings[i];
+            if (binding.action === actionName && binding.status === status) {
+                return binding.gesture;
             }
         }
         console.error("Error, no command found for this gesture");
@@ -85,12 +99,13 @@ class JSONReader {
         };
         for (let i in this.JSONData.gesture_bindings) {
             let binding = this.JSONData.gesture_bindings[i];
-            if (binding.gesture === gestureName && binding.status ===
-                status) {
+            if (binding.gesture === gestureName && binding.status === status) {
                 this.JSONData.gesture_bindings[i] = newBinding;
                 console.log(this.JSONData.gesture_bindings[i]);
+                return;
             }
         }
+        this.JSONData.gesture_bindings.push(newBinding);
     }
 }
 

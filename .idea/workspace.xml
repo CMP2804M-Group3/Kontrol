@@ -2,22 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="af81014b-5f8b-4f63-9f87-3133ac64a070" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/images/save.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/settings copy.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/scripts/JSONReader.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/scripts/kodiFunctions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/scripts/poseCode.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/scripts/poseScript.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/p5.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/p5.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/info.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/info.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/popup.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/popup.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/settings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/JSONReader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/JSONReader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/poseCode.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/poseCode.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/script.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +68,17 @@
       <recent name="$PROJECT_DIR$/src/pages" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="npm.start">
+    <configuration name="start (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="start" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="start" />
@@ -87,6 +86,11 @@
       <envs />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.start (1)" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -99,6 +103,7 @@
         </serviceView>
       </list>
     </option>
+    <option name="showServicesTree" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -119,7 +124,7 @@
       <workItem from="1584100097426" duration="4364000" />
       <workItem from="1584104874767" duration="41000" />
       <workItem from="1584104949902" duration="277000" />
-      <workItem from="1584105265514" duration="323000" />
+      <workItem from="1584105265514" duration="3799000" />
     </task>
     <task id="LOCAL-00001" summary="Added the settings page, not populated yet.">
       <created>1583083125197</created>
@@ -128,7 +133,14 @@
       <option name="project" value="LOCAL" />
       <updated>1583083125197</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Working on control settings">
+      <created>1584105678663</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1584105678663</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -151,31 +163,40 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Added the settings page, not populated yet." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added the settings page, not populated yet." />
+    <MESSAGE value="Working on control settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="Working on control settings" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1899" height="151" key="GridCell.Tab.0.bottom" timestamp="1584104836278">
+    <state x="580" y="34" key="CommitChangelistDialog2" timestamp="1584105676603">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="151" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584104836278" />
-    <state width="1899" height="151" key="GridCell.Tab.0.center" timestamp="1584104836276">
+    <state x="580" y="34" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1584105676603" />
+    <state width="1899" height="151" key="GridCell.Tab.0.bottom" timestamp="1584108983791">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="151" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584104836276" />
-    <state width="1899" height="151" key="GridCell.Tab.0.left" timestamp="1584104836274">
+    <state width="1899" height="151" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584108983791" />
+    <state width="1899" height="151" key="GridCell.Tab.0.center" timestamp="1584108983791">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="151" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584104836274" />
-    <state width="1899" height="151" key="GridCell.Tab.0.right" timestamp="1584104836277">
+    <state width="1899" height="151" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584108983791" />
+    <state width="1899" height="151" key="GridCell.Tab.0.left" timestamp="1584108983791">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="151" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584104836277" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1584102220698">
+    <state width="1899" height="151" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584108983791" />
+    <state width="1899" height="151" key="GridCell.Tab.0.right" timestamp="1584108983791">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1584102220698" />
+    <state width="1899" height="151" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584108983791" />
+    <state x="552" y="239" key="Vcs.Push.Dialog.v2" timestamp="1584105687444">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="239" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1584105687444" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1584107817904">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1584107817904" />
   </component>
 </project>

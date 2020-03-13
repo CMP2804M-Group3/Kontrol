@@ -292,7 +292,7 @@ function saveControlSettings() {
     settings.overwriteAction(volUp, "player", "volumeUp");
     settings.overwriteAction(mute, "player", "mute");
     settings.save(() => {
-        console.log("Saved!");
+        console.log("Save control settings");
         win.hide();
         win.loadURL(`file://${__dirname}/main.html`);
     });
@@ -399,22 +399,25 @@ function changeTab(evt, tab) {
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
+        tablinks[i].className = tablinks[i].className.replace(" open", "");
     }
 
     // Show the current tab, and add an "active" class to the button that opened the tab
     document.getElementById(tab).style.display = "block";
-    evt.currentTarget.className += " active";
+    evt.currentTarget.className += " active open";
 }
 
 function setupControlTab() {
     changeTab(event, 'Controls');
     setTimeout(() => {
-        setupDropdown("#themeSelect", settings.readPerformanceSetting("theme"));
-
-        setupDropdown("#architectureSelect", settings.readPerformanceSetting("architecture"));
-        setupDropdown("#outputSelect", settings.readPerformanceSetting("stride"));
-        setupDropdown("#multiplierSelect", settings.readPerformanceSetting("multiplier"));
-        setupDropdown("#quantSelect", settings.readPerformanceSetting("quant"));
+        setupDropdown("#playSelect", settings.getGestureFromAction("play", "player"));
+        setupDropdown("#rewindSelect", settings.getGestureFromAction("rewind", "player"));
+        setupDropdown("#forwardSelect", settings.getGestureFromAction("fastForward", "player"));
+        setupDropdown("#previousSelect", settings.getGestureFromAction("previous", "player"));
+        setupDropdown("#nextSelect", settings.getGestureFromAction("next", "player"));
+        setupDropdown("#volDownSelect", settings.getGestureFromAction("volumeDown", "player"));
+        setupDropdown("#volUpSelect", settings.getGestureFromAction("volumeUp", "player"));
+        setupDropdown("#muteSelect", settings.getGestureFromAction("mute", "player"));
 
 
     }, 200);

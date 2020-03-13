@@ -245,23 +245,22 @@
 
     <div class="rightPanel">
         <ul class="panelList">
-            <li class="selected" id="generalTab" onclick="openCity(event, 'General')" tabindex="0"><img class="wifi"
-                                                                                                        draggable="false"
-                                                                                                        src="images/wave.svg">
+            <li class="selected" id="generalTab" onclick="changeTab(event, 'General')" tabindex="0"><img class="wifi"
+                                                                                                         draggable="false"
+                                                                                                         src="images/wave.svg">
                 <h2>General</h2></li>
             <li id="controlsTab" onclick="setupControlTab()" tabindex="0"><img class="wifi" draggable="false"
                                                                                src="images/settings.svg">
                 <h2>Controls</h2></li>
 
-            <li class="save" id="connectionStatus" onclick="saveSettings()" tabindex="0"><img class="wifi"
-                                                                                              draggable="false"
-                                                                                              src="images/save.svg">
+            <li class="save" id="connectionStatus" tabindex="0"><img class="wifi"
+                                                                     draggable="false"
+                                                                     src="images/save.svg">
                 <h2>Save</h2></li>
 
         </ul>
     </div>
     <script>
-
 
         $().ready(() => {
             $(".leftPanel li").on("click", function () {
@@ -272,7 +271,16 @@
                 $(".rightPanel .selected").toggleClass("selected");
                 $(this).toggleClass("selected");
             });
+            $("#connectionStatus").on("click", () => {
+                let tab = $(".rightPanel li.open h2")[0].innerHTML;
+                console.log(tab);
+                if (tab === "Controls") {
+                    saveControlSettings();
+                } else {
+                    saveSettings();
+                }
 
+            });
             document.getElementById("generalTab").click();
             setTimeout(setupDropdowns, 200);
             setTimeout(() => {
@@ -415,9 +423,7 @@
 
         /* If the user clicks anywhere outside the select box,
         then close all select boxes: */
-        document.addEventListener("click", closeAllSelect); 
-
+        document.addEventListener("click", closeAllSelect);
 
     </script>
 </div>
-        
