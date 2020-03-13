@@ -2,14 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="af81014b-5f8b-4f63-9f87-3133ac64a070" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/images/save.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/settings copy.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/scripts/JSONReader.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/scripts/kodiFunctions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/scripts/poseCode.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/scripts/poseScript.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/p5.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/p5.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/info.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/info.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/popup.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/popup.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/settings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/style.css" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -17,17 +37,25 @@
         <option value="Joseph Pitts &lt;joepittsy@gmail.com&gt;" />
       </list>
     </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="UI" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SIGN_OFF_COMMIT" value="true" />
   </component>
   <component name="ProjectId" id="1XhxCp02NrryzETQLaRJWQU7Gzj" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -42,24 +70,14 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\44793\Documents\GitHub\gesture-recognition\src\" />
+      <recent name="C:\Users\44793\Documents\GitHub\gesture-recognition\src\scripts" />
       <recent name="$PROJECT_DIR$/src/pages" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/pages" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager">
     <configuration name="start" type="js.build_tools.npm" nameIsGenerated="true">
@@ -69,6 +87,18 @@
       <envs />
       <method v="2" />
     </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -85,6 +115,11 @@
       <workItem from="1582647002113" duration="7560000" />
       <workItem from="1582979325455" duration="18253000" />
       <workItem from="1583082345065" duration="829000" />
+      <workItem from="1584099787085" duration="268000" />
+      <workItem from="1584100097426" duration="4364000" />
+      <workItem from="1584104874767" duration="41000" />
+      <workItem from="1584104949902" duration="277000" />
+      <workItem from="1584105265514" duration="323000" />
     </task>
     <task id="LOCAL-00001" summary="Added the settings page, not populated yet.">
       <created>1583083125197</created>
@@ -114,10 +149,33 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Added the settings page, not populated yet." />
     <option name="LAST_COMMIT_MESSAGE" value="Added the settings page, not populated yet." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1899" height="151" key="GridCell.Tab.0.bottom" timestamp="1584104836278">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="151" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584104836278" />
+    <state width="1899" height="151" key="GridCell.Tab.0.center" timestamp="1584104836276">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="151" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584104836276" />
+    <state width="1899" height="151" key="GridCell.Tab.0.left" timestamp="1584104836274">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="151" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584104836274" />
+    <state width="1899" height="151" key="GridCell.Tab.0.right" timestamp="1584104836277">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="151" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584104836277" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1584102220698">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1584102220698" />
   </component>
 </project>
