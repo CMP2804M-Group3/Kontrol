@@ -155,19 +155,22 @@ function setup() {
  * Setup the webcam and posenet.
  */
 function webCamSetup() {
-    window.onerror(() => {
-        setTimeout(showWarningPopup("Webcam Error", "We can't connect to your webcam!", hideLoading), 200);
-    })
     showLoading();
-    video = createCapture(VIDEO);
-    video.hide();
+    navigator.mediaDevices.getUserMedia({video: true}).then(() => {
+        video = createCapture(VIDEO);
+        video.hide();
 
-    poseNet = ml5.poseNet(video, {
-        multiplier: parseFloat(settings.readPerformanceSetting("multiplier")),
-        outputStride: parseInt(settings.readPerformanceSetting("stride")),
-        architecture: settings.readPerformanceSetting("architecture"),
-        quantBytes: parseInt(settings.readPerformanceSetting("quant"))
-    }, modelLoaded);
+        poseNet = ml5.poseNet(video, {
+            multiplier: parseFloat(settings.readPerformanceSetting("multiplier")),
+            outputStride: parseInt(settings.readPerformanceSetting("stride")),
+            architecture: settings.readPerformanceSetting("architecture"),
+            quantBytes: parseInt(settings.readPerformanceSetting("quant"))
+        }, modelLoaded);
+    }).catch(() => {
+        console.log("No webcam");
+        setTimeout(showWarningPopup("Webcam Error", "We can't connect to your webcam!", hideLoading), 1000);
+
+    });
 
 }
 

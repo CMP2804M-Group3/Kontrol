@@ -2,20 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="af81014b-5f8b-4f63-9f87-3133ac64a070" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/joe.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/joe.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gesture-recognition.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gesture-recognition.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/info.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/info.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/returning.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/returning.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/settings copy.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/settings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scripts/JSONReader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/JSONReader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/scripts/poseCode.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/poseCode.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scripts/poseScript.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scripts/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/style.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -142,7 +130,7 @@
       <workItem from="1584104949902" duration="277000" />
       <workItem from="1584105265514" duration="3799000" />
       <workItem from="1584118861871" duration="195000" />
-      <workItem from="1584119077211" duration="5919000" />
+      <workItem from="1584119077211" duration="7009000" />
     </task>
     <task id="LOCAL-00001" summary="Added the settings page, not populated yet.">
       <created>1583083125197</created>
@@ -158,7 +146,14 @@
       <option name="project" value="LOCAL" />
       <updated>1584105678663</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Ready for Beta?">
+      <created>1584125117865</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1584125117865</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -182,7 +177,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Added the settings page, not populated yet." />
     <MESSAGE value="Working on control settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="Working on control settings" />
+    <MESSAGE value="Ready for Beta?" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ready for Beta?" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
