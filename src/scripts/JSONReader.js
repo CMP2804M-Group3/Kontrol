@@ -5,7 +5,7 @@ class JSONReader {
         fs.readFile(this.src, "utf8", (err, data) => {
             if (err) {
                 fs.mkdir(this.src.substr(0, this.src.length - "config.json".length,), () => {
-                    fs.writeFile(this.src, `{"general": {"ip": "","port": "","theme": "Light Blue","webcamEnabled": false,"showSkeleton": true},"performance": {"architecture": "MobileNetV1","stride": "16","multiplier": "0.5","quant": "2"},"kodis": []}`, function (err) {
+                    fs.writeFile(this.src, `{"general":{"ip":"","port":"","theme":"Light Blue","webcamEnabled":false,"showSkeleton":true},"performance":{"architecture":"MobileNetV1","stride":"16","multiplier":"0.5","quant":"2"},"gesture_bindings":{"play":"T Pose","volumeDown":"Left arm 90deg up","previous":"Left arm up","next":"Right arm up","rewind":"Left arm out","fastForward":"Right arm out","mute":"Unset","action":"Left arm 90deg up","T Pose":"play","Left arm out":"rewind","Right arm out":"fastForward","Left arm up":"previous","Right arm up":"next","Left arm 90deg up":"volumeDown","Right arm 90deg up":"volumeUp","Unset":"mute","volumeUp":"Right arm 90deg up"},"kodis":[{"ip":"127.0.0.1","port":"8080"}]}`, function (err) {
                         if (err) throw err;
                         console.log('File is created successfully.');
                         let win = remote.getCurrentWindow();
@@ -29,30 +29,13 @@ class JSONReader {
         if (callback) {
             fs.writeFile(this.src, jsonContent, 'utf8', callback);
         } else {
-            fs.writeFile(this.src, jsonContent, 'utf8');
+            fs.writeFile(this.src, jsonContent, 'utf8', () => {
+            });
 
         }
     }
 
-    getActionFromGesture(gestureName, status) {
-        for (let i in this.JSONData.gesture_bindings) {
-            let binding = this.JSONData.gesture_bindings[i];
-            if (binding.gesture === gestureName && binding.status === status) {
-                return binding;
-            }
-        }
-        console.error("Error, no command found for this gesture");
-    }
 
-    getGestureFromAction(actionName, status) {
-        for (let i in this.JSONData.gesture_bindings) {
-            let binding = this.JSONData.gesture_bindings[i];
-            if (binding.action === actionName && binding.status === status) {
-                return binding.gesture;
-            }
-        }
-        console.error("Error, no command found for this gesture");
-    }
 
     overwriteSetting(settingName, value) {
         this.JSONData.general[settingName] = value;
@@ -91,22 +74,23 @@ class JSONReader {
         this.JSONData.kodis = [];
     }
 
-    overwriteAction(gestureName, status, newAction) {
-        let newBinding = {
-            "gesture": gestureName,
-            "status": status,
-            "action": newAction
-        };
-        for (let i in this.JSONData.gesture_bindings) {
-            let binding = this.JSONData.gesture_bindings[i];
-            if (binding.gesture === gestureName && binding.status === status) {
-                this.JSONData.gesture_bindings[i] = newBinding;
-                console.log(this.JSONData.gesture_bindings[i]);
-                return;
-            }
-        }
-        this.JSONData.gesture_bindings.push(newBinding);
+    overwriteAction(action, pose) {
+        this.JSONData.gesture_bindings[action] = pose;
     }
+
+    getActionFromGesture(gestureName) {
+        function getKeyByValue(object, value) {
+            return Object.keys(object).find(key => object[key] === value);
+        }
+
+        return getKeyByValue(this.JSONData.gesture_bindings, gestureName);
+    }
+
+    getGestureFromAction(actionName) {
+        return this.JSONData.gesture_bindings[actionName];
+    }
+
+
 }
 
 module.exports = JSONReader;

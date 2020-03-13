@@ -46,23 +46,30 @@ let controlMap = {
 };
 
 
-$(".rightPanel li").on("click", function () {
-    $(".rightPanel .selected").toggleClass("selected");
-    $(this).toggleClass("selected");
-});
+
 
 function passFunc() {
 }
 
 function loadImages() {
 
-    images["playPause"] = loadImage('images/t.png');
-    images["volumeDown"] = loadImage("images/90_left.png");
-    images["volumeUp"] = loadImage("images/90_right.png");
-    images["goPrevious"] = loadImage("images/out_left.png");
-    images["goNext"] = loadImage("images/out_right.png");
-    images["rewind"] = loadImage("images/up_left.png");
-    images["fastForward"] = loadImage("images/up_right.png");
+    let imagePaths = {
+        "Left arm up": loadImage("images/up_left.png"),
+        "Right arm up": loadImage("images/up_right.png"),
+        "Left arm out": loadImage("images/out_left.png"),
+        "Right arm out": loadImage("images/out_right.png"),
+        "T Pose": loadImage('images/t.png'),
+        "Left arm 90deg up": loadImage("images/90_left.png"),
+        "Right arm 90deg up": loadImage("images/90_right.png"),
+    };
+
+    images.playPause = imagePaths[settings.getGestureFromAction("play")];
+    images.volumeDown = imagePaths[settings.getGestureFromAction("volumeDown")];
+    images.volumeUp = imagePaths[settings.getGestureFromAction("volumeUp")];
+    images.goPrevious = imagePaths[settings.getGestureFromAction("previous")];
+    images.goNext = imagePaths[settings.getGestureFromAction("next")];
+    images.rewind = imagePaths[settings.getGestureFromAction("rewind")];
+    images.fastForward = imagePaths[settings.getGestureFromAction("fastForward")];
 }
 
 /**
@@ -75,6 +82,11 @@ function setup() {
     win.setSize(1200, 800);
     win.center();
 
+    $(".rightPanel li").on("click", function () {
+        $(".rightPanel .selected").toggleClass("selected");
+        $(this).toggleClass("selected");
+    });
+
     /* Read the IP & Port from the settings file and create a
        kodi controller instance with those details. */
     settings = new JSONReader(configPath, () => {
@@ -83,13 +95,13 @@ function setup() {
         showSkeleton = settings.readSetting("showSkeleton");
         webcamAllowed = settings.readSetting("webcamEnabled");
 
-        map["T_pose"] = controlMap[settings.getActionFromGesture("T Pose", "player").action];
-        map["Left_arm_up"] = controlMap[settings.getActionFromGesture("Left arm up", "player").action];
-        map["Right_arm_up"] = controlMap[settings.getActionFromGesture("Right arm up", "player").action];
-        map["Left_arm_out"] = controlMap[settings.getActionFromGesture("Left arm out", "player").action];
-        map["Right_arm_out"] = controlMap[settings.getActionFromGesture("Right arm out", "player").action];
-        map["Left_arm_90_up"] = controlMap[settings.getActionFromGesture("Left arm 90deg up", "player").action];
-        map["Right_arm_90_up"] = controlMap[settings.getActionFromGesture("Right arm 90deg up", "player").action];
+        map.T_pose = controlMap[settings.getActionFromGesture("T Pose")];
+        map.Left_arm_up = controlMap[settings.getActionFromGesture("Left arm up")];
+        map.Right_arm_up = controlMap[settings.getActionFromGesture("Right arm up")];
+        map.Left_arm_out = controlMap[settings.getActionFromGesture("Left arm out")];
+        map.Right_arm_out = controlMap[settings.getActionFromGesture("Right arm out")];
+        map.Left_arm_90_up = controlMap[settings.getActionFromGesture("Left arm 90deg up")];
+        map.Right_arm_90_up = controlMap[settings.getActionFromGesture("Right arm 90deg up")];
 
         loadImages();
 
@@ -146,13 +158,21 @@ function webCamSetup() {
     showLoading();
     video = createCapture(VIDEO);
     video.hide();
-    poseNet = ml5.poseNet(video, {
-        multiplier: parseFloat(settings.readPerformanceSetting("multiplier")),
-        outputStride: parseInt(settings.readPerformanceSetting("stride")),
-        architecture: settings.readPerformanceSetting("architecture"),
-        quantBytes: parseInt(settings.readPerformanceSetting("quant"))
-    }, modelLoaded);
+    try {
+        console.log(video.src); // Will throw an error if the PC dosent have a webcam
+        poseNet = ml5.poseNet(video, {
+            multiplier: parseFloat(settings.readPerformanceSetting("multiplier")),
+            outputStride: parseInt(settings.readPerformanceSetting("stride")),
+            architecture: settings.readPerformanceSetting("architecture"),
+            quantBytes: parseInt(settings.readPerformanceSetting("quant"))
+        }, modelLoaded);
+    } catch (e) {
+        setTimeout(showWarningPopup("Webcam Error", "We can't connect to your webcam!", hideLoading), 200);
+
+    }
+
 }
+
 
 function showPopup() {
     settingsWin = new BrowserWindow({
@@ -309,5 +329,6 @@ function draw() {
         vertex(30, 10);
         endShape(CLOSE);
         pop();
+
     }
 }

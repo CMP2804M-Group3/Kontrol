@@ -8,7 +8,7 @@ const JSONReader = require(__dirname + '/scripts/JSONReader');
 
 let kodi = new kodiController();
 let toldUserAboutSetup = false;
-let configPath = `${require('os').homedir()}\\.Kontrol\\config.json`;
+let configPath = `${require('os').homedir()}/.Kontrol/config.json`;
 let running = true;
 let settings = new JSONReader(configPath);
 
@@ -42,9 +42,9 @@ function quitApp() {
     let wins = BrowserWindow.getAllWindows();
     for (let i = 0; i < wins.length; i++) {
         let path = wins[i].getURL();
-        let file = path.substr( path.lastIndexOf( "/" ) + 1 );
+        let file = path.substr(path.lastIndexOf("/") + 1);
         // if ( file !== "popup.html" || file !== "info.html" ) {
-            wins[ i ].close();
+        wins[i].close();
         // }
     }
     let win = remote.getCurrentWindow();
@@ -80,7 +80,7 @@ function closePopups() {
  * Toggles between light and dark mode
  */
 function toggleNightMode() {
-    if ( document.documentElement.getAttribute( "data-theme" ) === 'light' ) {
+    if (document.documentElement.getAttribute("data-theme") === 'light') {
         document.documentElement.setAttribute('data-theme', 'dark');
         settings.overwriteSetting("theme", "dark");
         settings.save();
@@ -111,7 +111,7 @@ function gotIPandPort() {
  * @param url The page to load
  * @param callback The function to run once the content is loaded
  */
-function loadContent(url, callback ) {
+function loadContent(url, callback) {
     // resources/app/
     let file = `src/${url}`;
     running = false;
@@ -142,26 +142,25 @@ function loadContent(url, callback ) {
  * @param item The item to push
  * @param length The length of the array
  */
-function setItem( array, item, length ) {
-    array.unshift( item ) > length ? array.pop() : null
+function setItem(array, item, length) {
+    array.unshift(item) > length ? array.pop() : null
 }
-
 
 
 function readIP() {
     let win = remote.getCurrentWindow();
-    if ( $( "#IP" )[ 0 ] === $( "#IP:valid" )[ 0 ] && $( "#port" )[ 0 ] === $(
-            "#port:valid" )[ 0 ] ) {
-        let ip = $( "#IP" )[ 0 ].value;
-        let port = $( "#port" )[ 0 ].value;
-        settings.overwriteSetting( "ip", ip );
-        settings.overwriteSetting( "port", port );
-        settings.addKodi( ip, port );
-        settings.save( () => {
+    if ($("#IP")[0] === $("#IP:valid")[0] && $("#port")[0] === $(
+        "#port:valid")[0]) {
+        let ip = $("#IP")[0].value;
+        let port = $("#port")[0].value;
+        settings.overwriteSetting("ip", ip);
+        settings.overwriteSetting("port", port);
+        settings.addKodi(ip, port);
+        settings.save(() => {
             win.hide();
             win.loadURL(`file://${__dirname}/main.html`);
 
-        } );
+        });
     }
 }
 
@@ -182,7 +181,7 @@ function selectFromScan() {
 }
 
 /**
- * Connection tab setup code
+ * Connection tabtab setup code
  */
 function connectionSetup() {
     var parent = document.getElementById('kodiConnectList');
@@ -199,10 +198,12 @@ function connectionSetup() {
                 <button class="whiteButton" onclick = 'dissconnect()'">Disconnect</button>
             </div>
         </li>`);
-    }else{
+    } else {
         $("#currentConnection")[0].innerHTML = "You are not connected to a Kodi!";
     }
-    if (kodis.length === 0){$(parent).css("display", "none");}
+    if (kodis.length === 0) {
+        $(parent).css("display", "none");
+    }
     kodis.reverse().forEach(kodi => {
         parent.insertAdjacentHTML("beforeend",
             `<li tabindex="0" >
@@ -249,20 +250,20 @@ function loadMain() {
  * Save the settings
  */
 function saveSettings() {
-    let webcam = $( "#webcamTickbox input" ).is( ":checked" );
-    let skeleton = $( "#skeletonTickbox input" ).is( ":checked" );
-    let theme = $( "#themeSelect .select-selected" )[ 0 ].innerHTML;
-    let architecture = $( "#architectureSelect .select-selected" )[ 0 ].innerHTML;
-    let output = $( "#outputSelect .select-selected" )[ 0 ].innerHTML;
-    let multi = $( "#multiplierSelect .select-selected" )[ 0 ].innerHTML;
-    let quant = $( "#quantSelect .select-selected" )[ 0 ].innerHTML;
+    let webcam = $("#webcamTickbox input").is(":checked");
+    let skeleton = $("#skeletonTickbox input").is(":checked");
+    let theme = $("#themeSelect .select-selected")[0].innerHTML;
+    let architecture = $("#architectureSelect .select-selected")[0].innerHTML;
+    let output = $("#outputSelect .select-selected")[0].innerHTML;
+    let multi = $("#multiplierSelect .select-selected")[0].innerHTML;
+    let quant = $("#quantSelect .select-selected")[0].innerHTML;
 
 
-    settings.overwriteSetting( "webcamEnabled", webcam );
-    settings.overwriteSetting( "showSkeleton", skeleton );
-    settings.overwriteSetting( "theme", theme );
-    settings.overwritePerformanceSetting( "architecture", architecture );
-    settings.overwritePerformanceSetting( "stride", output );
+    settings.overwriteSetting("webcamEnabled", webcam);
+    settings.overwriteSetting("showSkeleton", skeleton);
+    settings.overwriteSetting("theme", theme);
+    settings.overwritePerformanceSetting("architecture", architecture);
+    settings.overwritePerformanceSetting("stride", output);
     settings.overwritePerformanceSetting("multiplier", multi);
     settings.overwritePerformanceSetting("quant", quant);
 
@@ -274,28 +275,44 @@ function saveSettings() {
 }
 
 function saveControlSettings() {
-    let play = $("#playSelect .select-selected")[0].innerHTML;
-    let rewind = $("#rewindSelect .select-selected")[0].innerHTML;
-    let fastForward = $("#forwardSelect .select-selected")[0].innerHTML;
-    let previous = $("#previousSelect .select-selected")[0].innerHTML;
-    let next = $("#nextSelect .select-selected")[0].innerHTML;
-    let volDown = $("#volDownSelect .select-selected")[0].innerHTML;
-    let volUp = $("#volUpSelect .select-selected")[0].innerHTML;
-    let mute = $("#muteSelect .select-selected")[0].innerHTML;
+    function getNotUnique(array) {
+        let map = new Map();
+        array.forEach(a => {
+            if (a.innerHTML !== "Unset") {
+                map.set(a.innerHTML, (map.get(a.innerHTML) || 0) + 1)
+            }
+        });
+        return array.filter(a => map.get(a.innerHTML) > 1);
+    }
 
-    settings.overwriteAction(play, "player", "play");
-    settings.overwriteAction(rewind, "player", "rewind");
-    settings.overwriteAction(fastForward, "player", "fastForward");
-    settings.overwriteAction(previous, "player", "previous");
-    settings.overwriteAction(next, "player", "next");
-    settings.overwriteAction(volDown, "player", "volumeDown");
-    settings.overwriteAction(volUp, "player", "volumeUp");
-    settings.overwriteAction(mute, "player", "mute");
-    settings.save(() => {
-        console.log("Save control settings");
-        win.hide();
-        win.loadURL(`file://${__dirname}/main.html`);
-    });
+    let duplicates = getNotUnique($("#controlsList li .select-selected").toArray());
+    if (duplicates.length === 0) {
+        let play = $("#playSelect .select-selected")[0].innerHTML;
+        let rewind = $("#rewindSelect .select-selected")[0].innerHTML;
+        let fastForward = $("#forwardSelect .select-selected")[0].innerHTML;
+        let previous = $("#previousSelect .select-selected")[0].innerHTML;
+        let next = $("#nextSelect .select-selected")[0].innerHTML;
+        let volDown = $("#volDownSelect .select-selected")[0].innerHTML;
+        let volUp = $("#volUpSelect .select-selected")[0].innerHTML;
+        let mute = $("#muteSelect .select-selected")[0].innerHTML;
+
+        settings.overwriteAction("play", play);
+        settings.overwriteAction("rewind", rewind);
+        settings.overwriteAction("fastForward", fastForward);
+        settings.overwriteAction("previous", previous);
+        settings.overwriteAction("next", next);
+        settings.overwriteAction("volumeDown", volDown);
+        settings.overwriteAction("volumeUp", volUp);
+        settings.overwriteAction("mute", mute);
+        settings.save(() => {
+            console.log("Save control settings");
+            win.hide();
+            win.loadURL(`file://${__dirname}/main.html`);
+        });
+    }
+
+
+
 
 }
 
@@ -310,57 +327,57 @@ function toggleConnect(device) {
         if (!connection) {
             showWarningPopup("Connection Failed",
                 "Cannot connect, make sure that Kodi is turned on.");
-        }else{
+        } else {
             hideLoading();
             connectionSetup();
         }
-    } );
-    ipcMain.on( 'hide_loading', () => {
+    });
+    ipcMain.on('hide_loading', () => {
         hideLoading();
-    } );
+    });
 }
 
 function showLoading() {
-    $( "#loading" ).css( "display", "flex" );
+    $("#loading").css("display", "flex");
 }
 
 function hideLoading() {
-    $( "#loading" ).css( "display", "none" );
+    $("#loading").css("display", "none");
 }
 
-function showWarningPopup( title, message, callback ) {
-    settingsWin = new BrowserWindow( {
+function showWarningPopup(title, message, callback) {
+    settingsWin = new BrowserWindow({
         width: 350,
         height: 180,
         frame: false,
-        transparent: true,
         icon: `file://${__dirname}/icons/win/icon.ico`,
+        transparent: true,
         fullScreenable: false,
         maximizable: false,
         resizable: false,
         fullscreen: false,
         show: true,
         webPreferences: {
-			nodeIntegration: true
+            nodeIntegration: true
         }
-    } );
-    settingsWinwin.loadURL(`file://${__dirname}/pages/info.html`);
-    $( "html" ).css( "pointer-events", "none" );
-    settingsWin.setAlwaysOnTop( true );
-    ipcMain.on( 'Am_I_Ready', () => {
-        settingsWin.webContents.send( 'store-data', [ title, message ] );
-    } );
-    settingsWin.on( "closed", () => {
+    });
+    settingsWin.loadURL(`file://${__dirname}/pages/info.html`);
+    $("html").css("pointer-events", "none");
+    settingsWin.setAlwaysOnTop(true);
+    ipcMain.on('Am_I_Ready', () => {
+        settingsWin.webContents.send('store-data', [title, message]);
+    });
+    settingsWin.on("closed", () => {
         settingsWin = null;
-        $( "html" ).css( "pointer-events", "all" );
-        if ( callback ) {
+        $("html").css("pointer-events", "all");
+        if (callback) {
             callback();
         }
-    } );
+    });
 }
 
 
-function dissconnect(){
+function dissconnect() {
     showLoading();
     kodi = new kodiController("");
     connection = false;
@@ -368,15 +385,15 @@ function dissconnect(){
     connectionSetup();
 }
 
-function saveConnections(){
-    let parent = document.getElementById( 'kodiConnectList' );
+function saveConnections() {
+    let parent = document.getElementById('kodiConnectList');
     let kodis = settings.readKodis();
     settings.emptyKodis();
-    
+
     for (let index = 1; index < parent.children.length; index++) {
         const element = parent.children[index];
-        let checked = $($(element.children[1].children[0]).children()[1]).is( ":checked");
-        if ( checked ){
+        let checked = $($(element.children[1].children[0]).children()[1]).is(":checked");
+        if (checked) {
             settings.addKodi(element.children[0].innerText.split(":")[0], element.children[0].innerText.split(":")[1]);
         }
     }
@@ -409,18 +426,16 @@ function changeTab(evt, tab) {
 
 function setupControlTab() {
     changeTab(event, 'Controls');
-    setTimeout(() => {
-        setupDropdown("#playSelect", settings.getGestureFromAction("play", "player"));
-        setupDropdown("#rewindSelect", settings.getGestureFromAction("rewind", "player"));
-        setupDropdown("#forwardSelect", settings.getGestureFromAction("fastForward", "player"));
-        setupDropdown("#previousSelect", settings.getGestureFromAction("previous", "player"));
-        setupDropdown("#nextSelect", settings.getGestureFromAction("next", "player"));
-        setupDropdown("#volDownSelect", settings.getGestureFromAction("volumeDown", "player"));
-        setupDropdown("#volUpSelect", settings.getGestureFromAction("volumeUp", "player"));
-        setupDropdown("#muteSelect", settings.getGestureFromAction("mute", "player"));
+    setupDropdown("#playSelect", settings.getGestureFromAction("play", "player"));
+    setupDropdown("#rewindSelect", settings.getGestureFromAction("rewind", "player"));
+    setupDropdown("#forwardSelect", settings.getGestureFromAction("fastForward", "player"));
+    setupDropdown("#previousSelect", settings.getGestureFromAction("previous", "player"));
+    setupDropdown("#nextSelect", settings.getGestureFromAction("next", "player"));
+    setupDropdown("#volDownSelect", settings.getGestureFromAction("volumeDown", "player"));
+    setupDropdown("#volUpSelect", settings.getGestureFromAction("volumeUp", "player"));
+    setupDropdown("#muteSelect", settings.getGestureFromAction("mute", "player"));
 
 
-    }, 200);
 }
 
 

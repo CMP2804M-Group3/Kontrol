@@ -32,6 +32,10 @@
     </div>
 </div>
 <script>
+
+    const $ = require('jquery');
+    const remote = require('electron').remote;
+
     var ipcRenderer = require('electron').ipcRenderer;
     ipcRenderer.send('Am_I_Ready',"Im ready");
     ipcRenderer.send('hide_loading',"true");

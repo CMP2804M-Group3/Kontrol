@@ -19,7 +19,7 @@
 
 
         <div class="tabcontent" id="General">
-            <ul id="kodiList">
+            <ul class="settingsList" id="generalList">
                 <h2>General</h2>
                 <li class="settingsCheckbox" tabindex="0">
                     <h3>Allow Webcam access</h3>
@@ -104,7 +104,7 @@
         </div>
 
         <div class="tabcontent" id="Controls">
-            <ul id="kodiList">
+            <ul class="settingsList" id="controlsList">
                 <h2>Controls</h2>
 
 
@@ -120,7 +120,7 @@
                             <option value="5">Left arm 90deg up</option>
                             <option value="6">Right arm 90deg up</option>
                             <option value="7">T Pose</option>
-                            <option value="8">Whatever the mute gestures gonna be lol</option>
+                            <option value="8">Unset</option>
 
                         </select>
                     </div>
@@ -137,7 +137,7 @@
                             <option value="5">Left arm 90deg up</option>
                             <option value="6">Right arm 90deg up</option>
                             <option value="7">T Pose</option>
-                            <option value="8">Whatever the mute gestures gonna be lol</option>
+                            <option value="8">Unset</option>
                         </select>
                     </div>
                 </li>
@@ -153,7 +153,7 @@
                             <option value="5">Left arm 90deg up</option>
                             <option value="6">Right arm 90deg up</option>
                             <option value="7">T Pose</option>
-                            <option value="8">Whatever the mute gestures gonna be lol</option>
+                            <option value="8">Unset</option>
                         </select>
                     </div>
                 </li>
@@ -169,7 +169,7 @@
                             <option value="5">Left arm 90deg up</option>
                             <option value="6">Right arm 90deg up</option>
                             <option value="7">T Pose</option>
-                            <option value="8">Whatever the mute gestures gonna be lol</option>
+                            <option value="8">Unset</option>
                         </select>
                     </div>
                 </li>
@@ -185,7 +185,7 @@
                             <option value="5">Left arm 90deg up</option>
                             <option value="6">Right arm 90deg up</option>
                             <option value="7">T Pose</option>
-                            <option value="8">Whatever the mute gestures gonna be lol</option>
+                            <option value="8">Unset</option>
                         </select>
                     </div>
                 </li>
@@ -201,7 +201,7 @@
                             <option value="5">Left arm 90deg up</option>
                             <option value="6">Right arm 90deg up</option>
                             <option value="7">T Pose</option>
-                            <option value="8">Whatever the mute gestures gonna be lol</option>
+                            <option value="8">Unset</option>
                         </select>
                     </div>
                 </li>
@@ -217,7 +217,7 @@
                             <option value="5">Left arm 90deg up</option>
                             <option value="6">Right arm 90deg up</option>
                             <option value="7">T Pose</option>
-                            <option value="8">Whatever the mute gestures gonna be lol</option>
+                            <option value="8">Unset</option>
                         </select>
                     </div>
                 </li>
@@ -233,7 +233,7 @@
                             <option value="5">Left arm 90deg up</option>
                             <option value="6">Right arm 90deg up</option>
                             <option value="7">T Pose</option>
-                            <option value="8">Whatever the mute gestures gonna be lol</option>
+                            <option value="8">Unset</option>
                         </select>
                     </div>
                 </li>
@@ -245,12 +245,13 @@
 
     <div class="rightPanel">
         <ul class="panelList">
-            <li class="selected" id="generalTab" onclick="changeTab(event, 'General')" tabindex="0"><img class="wifi"
-                                                                                                         draggable="false"
-                                                                                                         src="images/wave.svg">
+            <li class="selected tablinks" id="generalTab" onclick="changeTab(event, 'General')" tabindex="0"><img
+                    class="wifi"
+                    draggable="false"
+                    src="images/wave.svg">
                 <h2>General</h2></li>
-            <li id="controlsTab" onclick="setupControlTab()" tabindex="0"><img class="wifi" draggable="false"
-                                                                               src="images/settings.svg">
+            <li id="controlsTab tablinks" onclick="setupControlTab()" tabindex="0"><img class="wifi" draggable="false"
+                                                                                        src="images/settings.svg">
                 <h2>Controls</h2></li>
 
             <li class="save" id="connectionStatus" tabindex="0"><img class="wifi"
@@ -272,34 +273,35 @@
                 $(this).toggleClass("selected");
             });
             $("#connectionStatus").on("click", () => {
-                let tab = $(".rightPanel li.open h2")[0].innerHTML;
-                console.log(tab);
+                let tab = $(".rightPanel li.active h2")[0].innerHTML;
                 if (tab === "Controls") {
                     saveControlSettings();
                 } else {
                     saveSettings();
                 }
-
             });
+
+            // $("#kodiList li")
+
+
             document.getElementById("generalTab").click();
-            setTimeout(setupDropdowns, 200);
-            setTimeout(() => {
-                setupDropdown("#themeSelect", settings.readSetting("theme"));
+            setupDropdowns();
+            setupDropdown("#themeSelect", settings.readSetting("theme"));
 
-                setupDropdown("#architectureSelect", settings.readPerformanceSetting("architecture"));
-                setupDropdown("#outputSelect", settings.readPerformanceSetting("stride"));
-                setupDropdown("#multiplierSelect", settings.readPerformanceSetting("multiplier"));
-                setupDropdown("#quantSelect", settings.readPerformanceSetting("quant"));
+            setupDropdown("#architectureSelect", settings.readPerformanceSetting("architecture"));
+            setupDropdown("#outputSelect", settings.readPerformanceSetting("stride"));
+            setupDropdown("#multiplierSelect", settings.readPerformanceSetting("multiplier"));
+            setupDropdown("#quantSelect", settings.readPerformanceSetting("quant"));
 
-                if (settings.readSetting("webcamEnabled")) {
-                    $("#webcamTickbox input").click()
-                }
-                if (settings.readSetting("showSkeleton")) {
-                    $("#skeletonTickbox input").click()
-                }
+            if (settings.readSetting("webcamEnabled")) {
+                $("#webcamTickbox input").click()
+            }
+            if (settings.readSetting("showSkeleton")) {
+                $("#skeletonTickbox input").click()
+            }
 
 
-            }, 200);
+
             $("#myRange").on("change", () => {
                 let value = int($("#myRange")[0].value);
                 // console.log(value)
@@ -337,6 +339,39 @@
             });
         });
 
+        function getNotUnique(array) {
+            var map = new Map();
+            array.forEach(a => {
+                if (a.innerHTML !== "Unset") {
+                    map.set(a.innerHTML, (map.get(a.innerHTML) || 0) + 1)
+                }
+            });
+            return array.filter(a => map.get(a.innerHTML) > 1);
+        }
+
+        function dropdownChanged() {
+            let tab = $(".rightPanel li.active h2")[0].innerHTML;
+            if (tab === "Controls") {
+                let items = Array.from($("#controlsList li .select-selected").toArray(), x => x.innerHTML);
+                const uniqueArray = Array.from(new Set(items));
+                if (items.length === uniqueArray.length) {
+                    console.log("all unique!");
+                    $("#controlsList li div").removeClass("invalid");
+
+                } else {
+                    console.log("uh oh");
+                    let duplicates = getNotUnique($("#controlsList li .select-selected").toArray());
+                    $("#controlsList li div").removeClass("invalid");
+                    console.log(duplicates.length);
+                    duplicates.forEach((item) => {
+                        $(item.parentElement).addClass("invalid");
+                    })
+                }
+            }
+
+
+        }
+
         // Get the element with id="defaultOpen" and click on it
         document.getElementById("defaultTab").click();
 
@@ -344,13 +379,11 @@
         function updateDropdown() {
             /* When an item is clicked, update the original select box,
             and the selected item: */
-            // console.log(this);
-
             var y, i, k, s, h;
             s = this.parentNode.parentNode.getElementsByTagName("select")[0];
             h = this.parentNode.previousSibling;
             for (i = 0; i < s.length; i++) {
-                if (s.options[i].innerHTML == this.innerHTML) {
+                if (s.options[i].innerHTML === this.innerHTML) {
                     s.selectedIndex = i;
                     h.innerHTML = this.innerHTML;
                     y = this.parentNode.getElementsByClassName("same-as-selected");
@@ -363,6 +396,8 @@
             }
             // console.log(h);
             h.click();
+            dropdownChanged();
+
         }
 
         function setupDropdowns() {
@@ -395,6 +430,9 @@
                     closeAllSelect(this);
                     this.nextSibling.classList.toggle("select-hide");
                     this.classList.toggle("select-arrow-active");
+
+
+                    // alert("clicked");
                 });
             }
         }

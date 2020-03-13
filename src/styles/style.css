@@ -327,6 +327,12 @@ ul li {
     width: 362px;
 }
 
+
+.settingsList li {
+    margin-left: 13px;
+    width: 362px;
+}
+
 #kodiConnectList li {
     margin-left: 13px;
     width: 362px;
@@ -344,6 +350,12 @@ ul li h2 {
 }
 
 #kodiList {
+    height: 144px;
+    overflow: auto;
+    padding-left: 0;
+}
+
+.settingsList {
     height: 144px;
     overflow: auto;
     padding-left: 0;
@@ -654,7 +666,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 }
 
 
-.settingsCentre #kodiList {
+.settingsCentre .settingsList {
     width: 765px;
     height: 100%;
 }
@@ -663,7 +675,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     height: 100%;
 }
 
-.settingsCentre #kodiList h2 {
+.settingsCentre .settingsList h2 {
     font-weight: 300;
     font-family: 'Roboto';
     font-size: 22px;
@@ -671,7 +683,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     margin-top: 0px;
 }
 
-.settingsCentre #kodiList h3 {
+.settingsCentre .settingsList h3 {
     font-weight: 300;
     font-family: 'Roboto';
     font-size: 18px;
@@ -680,7 +692,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     margin-bottom: 0px;
 }
 
-.settingsCentre #kodiList li {
+.settingsCentre .settingsList li {
     width: 576px;
     height: 50px;
     border-bottom: white;
@@ -688,7 +700,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     position: relative;
 }
 
-.settingsCentre #kodiList li:hover, .settingsCentre #kodiList li:focus {
+.settingsCentre .settingsList li:hover, .settingsCentre .settingsList li:focus {
     background: none;
 }
 
@@ -734,7 +746,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 
 .select-selected {
     background-color: white;
-    color: var(-blue);
+    color: var(--blue);
 }
 
 /* Style the arrow inside the select element: */
@@ -798,7 +810,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     right: 5px;
 }
 
-.settingsCentre #kodiList h2 {
+.settingsCentre .settingsList h2 {
     margin: 0px;
     padding-bottom: 5px;
     font-weight: 500;
@@ -901,7 +913,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     height: 80%;
 }
 
-#Controls #kodiList {
+#Controls .settingsList {
     height: 100%;
 }
 
@@ -957,4 +969,8 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 
 .save {
     width: 100%;
+}
+
+.invalid {
+    border-bottom: #9e3a34 6px solid;
 }

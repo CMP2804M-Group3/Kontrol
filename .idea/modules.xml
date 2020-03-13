@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$USER_HOME$/.Kontrol/.idea/.Kontrol.iml" filepath="$USER_HOME$/.Kontrol/.idea/.Kontrol.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/gesture-recognition.iml" filepath="$PROJECT_DIR$/.idea/gesture-recognition.iml" />
     </modules>
   </component>
