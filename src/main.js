@@ -1,5 +1,5 @@
-const { app, BrowserWindow } = require("electron");
-var path = require('path')
+const {app, BrowserWindow} = require("electron");
+var path = require('path');
 
 let win;
 
@@ -25,7 +25,9 @@ function CreateWindow(){
 	});
 	win.setMenu(null);
 	// this should stop the user from fullscreening from double clicking the title bar
-	win.setFullScreenable(false);win.setMaximizable(false); win.isResizable(false);
+	win.setFullScreenable(false);
+	win.setMaximizable(false);
+	win.isResizable(false);
 
 	win.webContents.on('dom-ready', function () {
 		win.show();
@@ -33,12 +35,11 @@ function CreateWindow(){
 	win.loadURL(`file://${__dirname}/index.html`);
 
 	// remove this before complete release
-	// win.webContents.openDevTools();
+	win.webContents.openDevTools();
 
 	win.on("closed", () => {
 		win = null;
 	});
-
 
 
 }

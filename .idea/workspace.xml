@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="af81014b-5f8b-4f63-9f87-3133ac64a070" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scripts/poseCode.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/poseCode.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -11,27 +11,42 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
         <option value="Joseph Pitts &lt;joepittsy@gmail.com&gt;" />
       </list>
     </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Linux" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SIGN_OFF_COMMIT" value="true" />
   </component>
   <component name="ProjectId" id="1XhxCp02NrryzETQLaRJWQU7Gzj" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
+    <property name="last_opened_file_path" value="$USER_HOME$/.Kontrol" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -42,6 +57,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\44793\Documents\GitHub\gesture-recognition\src\" />
+      <recent name="C:\Users\44793\Documents\GitHub\gesture-recognition\src\scripts" />
       <recent name="$PROJECT_DIR$/src/pages" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
@@ -61,7 +78,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="npm.start">
+    <configuration name="script.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/scripts/script.js" working-dir="$PROJECT_DIR$/src/scripts">
+      <method v="2" />
+    </configuration>
+    <configuration name="start (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="start" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="start" />
@@ -69,6 +99,15 @@
       <envs />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.script.js" />
+        <item itemvalue="npm.start (1)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="showServicesTree" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -85,6 +124,13 @@
       <workItem from="1582647002113" duration="7560000" />
       <workItem from="1582979325455" duration="18253000" />
       <workItem from="1583082345065" duration="829000" />
+      <workItem from="1584099787085" duration="268000" />
+      <workItem from="1584100097426" duration="4364000" />
+      <workItem from="1584104874767" duration="41000" />
+      <workItem from="1584104949902" duration="277000" />
+      <workItem from="1584105265514" duration="3799000" />
+      <workItem from="1584118861871" duration="195000" />
+      <workItem from="1584119077211" duration="7009000" />
     </task>
     <task id="LOCAL-00001" summary="Added the settings page, not populated yet.">
       <created>1583083125197</created>
@@ -93,7 +139,21 @@
       <option name="project" value="LOCAL" />
       <updated>1583083125197</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Working on control settings">
+      <created>1584105678663</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1584105678663</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Ready for Beta?">
+      <created>1584125117865</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1584125117865</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -114,10 +174,29 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Added the settings page, not populated yet." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added the settings page, not populated yet." />
+    <MESSAGE value="Working on control settings" />
+    <MESSAGE value="Ready for Beta?" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ready for Beta?" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="580" y="34" key="CommitChangelistDialog2" />
+    <state x="580" y="34" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" />
+    <state width="1899" height="151" key="GridCell.Tab.0.bottom" />
+    <state width="1899" height="151" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" />
+    <state width="1899" height="151" key="GridCell.Tab.0.center" />
+    <state width="1899" height="151" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" />
+    <state width="1899" height="151" key="GridCell.Tab.0.left" />
+    <state width="1899" height="151" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" />
+    <state width="1899" height="151" key="GridCell.Tab.0.right" />
+    <state width="1899" height="151" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" />
+    <state x="552" y="239" key="Vcs.Push.Dialog.v2" />
+    <state x="552" y="239" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" />
+    <state x="616" y="240" key="run.anything.popup" />
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" />
   </component>
 </project>

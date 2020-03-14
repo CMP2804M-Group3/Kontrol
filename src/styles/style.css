@@ -327,6 +327,12 @@ ul li {
     width: 362px;
 }
 
+
+.settingsList li {
+    margin-left: 13px;
+    width: 362px;
+}
+
 #kodiConnectList li {
     margin-left: 13px;
     width: 362px;
@@ -344,6 +350,12 @@ ul li h2 {
 }
 
 #kodiList {
+    height: 144px;
+    overflow: auto;
+    padding-left: 0;
+}
+
+.settingsList {
     height: 144px;
     overflow: auto;
     padding-left: 0;
@@ -653,16 +665,17 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     width: 206px;
 }
 
-.settingsCentre {
-    width: 986px;
-}
 
-.settingsCentre #kodiList {
+.settingsCentre .settingsList {
     width: 765px;
-    height: 80%;
+    height: 100%;
 }
 
-.settingsCentre #kodiList h2 {
+#General {
+    height: 100%;
+}
+
+.settingsCentre .settingsList h2 {
     font-weight: 300;
     font-family: 'Roboto';
     font-size: 22px;
@@ -670,7 +683,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     margin-top: 0px;
 }
 
-.settingsCentre #kodiList h3 {
+.settingsCentre .settingsList h3 {
     font-weight: 300;
     font-family: 'Roboto';
     font-size: 18px;
@@ -679,7 +692,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     margin-bottom: 0px;
 }
 
-.settingsCentre #kodiList li {
+.settingsCentre .settingsList li {
     width: 576px;
     height: 50px;
     border-bottom: white;
@@ -687,7 +700,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     position: relative;
 }
 
-.settingsCentre #kodiList li:hover, .settingsCentre #kodiList li:focus {
+.settingsCentre .settingsList li:hover, .settingsCentre .settingsList li:focus {
     background: none;
 }
 
@@ -733,7 +746,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 
 .select-selected {
     background-color: white;
-    color: var(-blue);
+    color: var(--blue);
 }
 
 /* Style the arrow inside the select element: */
@@ -797,7 +810,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     right: 5px;
 }
 
-.settingsCentre #kodiList h2 {
+.settingsCentre .settingsList h2 {
     margin: 0px;
     padding-bottom: 5px;
     font-weight: 500;
@@ -884,19 +897,28 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   }
   .lds-spinner div:nth-child(12) {
     transform: rotate(330deg);
-    animation-delay: 0s;
+      animation-delay: 0s;
   }
-  @keyframes lds-spinner {
+
+@keyframes lds-spinner {
     0% {
-      opacity: 1;
+        opacity: 1;
     }
     100% {
-      opacity: 0;
+        opacity: 0;
     }
-  }
-  
+}
 
-#loading{
+#Controls {
+    height: 80%;
+}
+
+#Controls .settingsList {
+    height: 100%;
+}
+
+
+#loading {
     z-index: 2;
     position: absolute;
     display: none; /* Flex to show */
@@ -908,4 +930,47 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     flex-direction: column;
     text-align: center;
     background-color: rgba(33, 33, 33, .3);
+}
+
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    /* border: 1px solid #ccc; */
+    /* background-color; */
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+
+}
+
+.save {
+    width: 100%;
+}
+
+.invalid {
+    border-bottom: #9e3a34 6px solid;
 }
