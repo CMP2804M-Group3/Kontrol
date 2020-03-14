@@ -113,7 +113,7 @@ function gotIPandPort() {
  */
 function loadContent(url, callback) {
     // resources/app/
-    let file = `src/${url}`;
+    let file = __dirname + "/" + src;
     running = false;
     let parent = document.getElementById('parent');
     let old = document.getElementById('inserted');
@@ -192,7 +192,7 @@ function connectionSetup() {
         $("#currentConnection")[0].innerHTML = "Connected!";
         parent.insertAdjacentHTML("afterbegin",
             `<li tabindex="0" class = "connectedConnection" >
-            <div style="display: flex; align-items: center;"><img class = "wifi" src="../images/wifi.svg" draggable="false"><h2>${kodi.url.split("http://")[1].split(":")[0]
+            <div style="display: flex; align-items: center;"><img class = "wifi" src="images/wifi.svg" draggable="false"><h2>${kodi.url.split("http://")[1].split(":")[0]
             }:${kodi.url.split("http://")[1].split(":")[1].split("/")[0]}</h2></div>
             <div class = "connectionControls">            
                 <button class="whiteButton" onclick = 'dissconnect()'">Disconnect</button>
