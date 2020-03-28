@@ -128,7 +128,7 @@ function setup() {
 
 
         /* Create a canvas and insert it under the title. */
-        canvas = createCanvas(640, 360);
+        canvas = createCanvas(740, 460);
         canvas.parent("title");
 
 
@@ -325,7 +325,7 @@ function draw() {
         // Draw a camera icon
         background("#e6efe9");
         push();
-        translate(320, 180);
+        translate(370 ,230);
         fill(0);
         rect(-50, -25, 75, 50, 5);
         beginShape();

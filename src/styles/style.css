@@ -487,7 +487,6 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 
 #defaultCanvas0 {
     border-radius: 5px;
-    margin-left: 50px;
     margin-top: 20px;
 }
 
@@ -973,4 +972,19 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 
 .invalid {
     border-bottom: #9e3a34 6px solid;
+}
+
+#centre p{
+
+    margin-left: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: 0px;
+
+}
+
+#centre h2{
+
+    padding-left: 20px;
+
 }
