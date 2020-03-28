@@ -5,7 +5,39 @@ class JSONReader {
         fs.readFile(this.src, "utf8", (err, data) => {
             if (err) {
                 fs.mkdir(this.src.substr(0, this.src.length - "config.json".length,), () => {
-                    fs.writeFile(this.src, `{"general":{"ip":"","port":"","theme":"Light Blue","webcamEnabled":false,"showSkeleton":true},"performance":{"architecture":"MobileNetV1","stride":"16","multiplier":"0.5","quant":"2"},"gesture_bindings":{"play":"T Pose","volumeDown":"Left arm 90deg up","previous":"Left arm up","next":"Right arm up","rewind":"Left arm out","fastForward":"Right arm out","mute":"Unset","action":"Left arm 90deg up","T Pose":"play","Left arm out":"rewind","Right arm out":"fastForward","Left arm up":"previous","Right arm up":"next","Left arm 90deg up":"volumeDown","Right arm 90deg up":"volumeUp","Unset":"mute","volumeUp":"Right arm 90deg up"},"kodis":[{"ip":"127.0.0.1","port":"8080"}]}`, function (err) {
+                    fs.writeFile(this.src, `{
+                        "general": {
+                            "ip": "",
+                            "port": "",
+                            "theme": "Light Blue",
+                            "webcamEnabled": false,
+                            "showSkeleton": true
+                        },
+                        "performance": {
+                            "architecture": "MobileNetV1",
+                            "stride": "16",
+                            "multiplier": "0.5",
+                            "quant": "2"
+                        },
+                        "gesture_bindings": {
+                            "play": "T Pose",
+                            "volumeDown": "Left arm 90deg up",
+                            "previous": "Left arm up",
+                            "next": "Right arm up",
+                            "rewind": "Left arm out",
+                            "fastForward": "Right arm out",
+                            "mute": "Ears Covered",
+                            "action": "Left arm 90deg up",
+                            "T Pose": "play"
+                    
+                        },
+                        "kodis": [
+                            {
+                                "ip": "127.0.0.1",
+                                "port": "8080"
+                            }
+                        ]
+                    }`, function (err) {
                         if (err) throw err;
                         console.log('File is created successfully.');
                         let win = remote.getCurrentWindow();

@@ -30,7 +30,7 @@ let map = {
     "T_pose": playPause,
     "Left_arm_90_up": volumeDown,
     "Right_arm_90_up": volumeUp,
-    "Both_arms_90_down": mute,
+    "Ears_Covered": mute,
     "base": passFunc
 };
 let controlMap = {
@@ -61,6 +61,7 @@ function loadImages() {
         "T Pose": loadImage('images/t.png'),
         "Left arm 90deg up": loadImage("images/90_left.png"),
         "Right arm 90deg up": loadImage("images/90_right.png"),
+        "Ears Covered": loadImage("images/ears_covered.png"),
     };
 
     images.playPause = imagePaths[settings.getGestureFromAction("play")];
@@ -70,6 +71,8 @@ function loadImages() {
     images.goNext = imagePaths[settings.getGestureFromAction("next")];
     images.rewind = imagePaths[settings.getGestureFromAction("rewind")];
     images.fastForward = imagePaths[settings.getGestureFromAction("fastForward")];
+    images.mute = imagePaths[settings.getGestureFromAction("mute")];
+
 }
 
 /**
@@ -102,6 +105,8 @@ function setup() {
         map.Right_arm_out = controlMap[settings.getActionFromGesture("Right arm out")];
         map.Left_arm_90_up = controlMap[settings.getActionFromGesture("Left arm 90deg up")];
         map.Right_arm_90_up = controlMap[settings.getActionFromGesture("Right arm 90deg up")];
+        map.Ears_Covered = controlMap[settings.getActionFromGesture("Ears Covered")];
+
 
         loadImages();
 

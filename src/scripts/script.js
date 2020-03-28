@@ -113,7 +113,7 @@ function gotIPandPort() {
  */
 function loadContent(url, callback) {
     // resources/app/
-    let file = __dirname + "/" + src;
+    let file = __dirname + "/" + url;
     running = false;
     let parent = document.getElementById('parent');
     let old = document.getElementById('inserted');
