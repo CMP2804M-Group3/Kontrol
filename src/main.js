@@ -35,7 +35,7 @@ function CreateWindow(){
 	win.loadURL(`file://${__dirname}/index.html`);
 
 	// remove this before complete release
-	win.webContents.openDevTools();
+	// win.webContents.openDevTools();
 
 	win.on("closed", () => {
 		win = null;

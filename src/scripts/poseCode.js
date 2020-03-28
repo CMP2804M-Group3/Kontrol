@@ -128,7 +128,7 @@ function setup() {
 
 
         /* Create a canvas and insert it under the title. */
-        canvas = createCanvas(740, 460);
+        canvas = createCanvas(740, 416.25);
         canvas.parent("title");
 
 
@@ -163,6 +163,7 @@ function webCamSetup() {
     showLoading();
     navigator.mediaDevices.getUserMedia({video: true}).then(() => {
         video = createCapture(VIDEO);
+        video.size(740,480)
         video.hide();
 
         poseNet = ml5.poseNet(video, {
@@ -288,9 +289,9 @@ function modelLoaded() {
 function draw() {
     if (ready) {
         push();
-        translate(video.width, 0);
+        translate(740, 0);
         scale(-1, 1);
-        image(video, 0, 0, video.width, video.height);
+        image(video, 0, 0, 740, video.height);
         if (showSkeleton) {
             if (pose) {
                 for (let i = 0; i < skeleton.length; i++) {
@@ -314,7 +315,7 @@ function draw() {
         push();
         tint(255, 127.5);
         try {
-            image(images[$(".rightPanel .selected")[0].id], 0, 0, 640, 360);
+            image(images[$(".rightPanel .selected")[0].id], 0, 0, 740, 416.25);
 
         } catch (e) {
         }
