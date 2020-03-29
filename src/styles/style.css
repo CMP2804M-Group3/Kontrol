@@ -10,25 +10,26 @@
 }
 
 .big {
-    height: 792px;
-    width: 1192px;
+    height: 800px;
+    width: 1200px;
 }
 
 .webcamPopup {
-    height: 172px;
-    width: 342px;
+    height: 180px;
+    width: 350px;
 }
 
 html, body {
     font-family: 'Roboto-Light', sans-serif;
     overflow: hidden;
-    width: 392px;
-    height: 292px;
+    width: 400px;
+    height: 300px;
     user-select: none;
 }
 
 body {
     border-radius: 5px;
+    margin: 0;
 }
 
 .container {
@@ -83,6 +84,10 @@ li {
 
 #kodiSetupSettings h1 {
     margin-left: 20px;
+}
+
+#settings{
+    width: 210px;
 }
 
 .parent {

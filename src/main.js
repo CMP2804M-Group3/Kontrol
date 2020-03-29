@@ -1,3 +1,5 @@
+const {Menu} = require("electron");
+
 const {app, BrowserWindow} = require("electron");
 var path = require('path');
 
@@ -8,7 +10,7 @@ function CreateWindow(){
 	win = new BrowserWindow({
 		width: 400,
 		height: 300,
-		icon: path.join(__dirname, 'icons/win/icon.ico'),
+		icon: path.join(__dirname, 'icons/mac/icon.icns'),
 		frame: false,
 		transparent: true,
 		fullScreenable: false,
@@ -56,3 +58,8 @@ app.on("activate", () => {
 	}
 });
 
+const template=[
+	{label:"Kontrol"}
+];
+const menu = Menu.buildFromTemplate(template);
+Menu.setApplicationMenu(menu);

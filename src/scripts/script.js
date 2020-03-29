@@ -350,7 +350,7 @@ function showWarningPopup(title, message, callback) {
         width: 350,
         height: 180,
         frame: false,
-        icon: `file://${__dirname}/icons/win/icon.ico`,
+        icon: `file://${__dirname}/icons/mac/icon.icns`,
         transparent: true,
         fullScreenable: false,
         maximizable: false,
