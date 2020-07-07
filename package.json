@@ -13,7 +13,7 @@
     "ml5": "0.4.3"
   },
   "devDependencies": {
-    "electron": "^7.1.10",
+    "electron": "^7.2.4",
     "electron-winstaller": "^4.0.0",
     "electron-wix-msi": "^2.2.0"
   },
