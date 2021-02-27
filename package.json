@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "kodi-controller": "^1.0.11",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ml5": "0.4.3"
   },
   "devDependencies": {
